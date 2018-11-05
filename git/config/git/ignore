@@ -1,0 +1,13 @@
+# This is a gitignore file with some general rules.
+# It is not meant to replace the gitignore file for an individual project.
+.DS_Store
+*.xcuserdatad
+CodyScratchSpec.scala
+.idea/
+.idea_modules/
+.tags
+.ensime
+.ensime_cache/
+ensime.sbt
+cody.sbt
+.zshrc.local

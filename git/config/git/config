@@ -1,0 +1,22 @@
+[user]
+  name = Cody Allen
+  email = ceedubs@gmail.com
+  signingkey = 9D6E4A9401BF3AA4
+[alias]
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  s = status -sb
+  add-prs = config --add remote.upstream.fetch '+refs/pull/*/head:refs/remotes/upstream/pr/*'
+  prs = pr list --format='%sC%>(8)%i%Creset %t %l %Cgreen(%cr)%Creset %Cblue<%au>%Creset %Cyellow%S%Creset%n'
+  issues = issue --format='%sC%>(8)%i%Creset %t %l %Cgreen(%cr)%Creset %Cblue<%au>%Creset %Cyellow%S%Creset%n'
+[credential]
+  helper = cache
+[merge]
+  conflictstyle = diff3
+[rerere]
+  enabled = true
+[includeIf "gitdir:~/code/work/"]
+    path = ~/.gitconfig-work
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign = true

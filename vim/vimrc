@@ -1,0 +1,124 @@
+set nocompatible
+syntax on
+colorscheme Tomorrow-Night-Eighties
+filetype plugin on
+set ai
+set tabstop=2 shiftwidth=2 expandtab
+set hidden
+set autoread
+set backspace=indent,eol,start
+
+set nohlsearch
+
+" don't highlight matching parentheses/brackets
+let loaded_matchparen=1
+
+" display relative line numbers
+set relativenumber
+
+" with vsplit, have new window on the right
+set splitright
+
+" with split, have new window on bottom
+set splitbelow
+
+" reaching for escape is a pain, and I don't type kj much in vim
+inoremap kj <Esc>
+cnoremap kj <C-c>
+xnoremap kj <C-c>
+snoremap kj <Esc>
+
+" 2 <C-g> is more helpful than <C-g>
+"noremap <C-g> 2<C-g>
+set laststatus=2
+let g:airline_theme='bubblegum'
+
+" resize vsplits on window resize
+" taken from http://vimbits.com/bits/268
+au VimResized * exe "normal! \<c-w>="
+
+" Save your swp files to a less annoying place than the current directory.
+" If you have .vim-swap in the current directory, it'll use that.
+" Otherwise it saves it to ~/.vim/swap, ~/tmp or .
+" taken from http://vimbits.com/bits/244
+if isdirectory($HOME . '/.vim/swap') == 0
+:silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
+endif
+set directory=./.vim-swap//
+set directory+=~/.vim/swap//
+set directory+=~/tmp//
+set directory+=.
+
+" spellcheck Git commit messages
+autocmd BufRead COMMIT_EDITMSG setlocal spell!
+
+" for commit messages, open diff (between current and HEAD) in split window
+autocmd BufRead COMMIT_EDITMSG rightb vert new | set buftype=nofile | set bufhidden=hide | setlocal noswapfile | read !git diff --cached
+
+let mapleader = ";"
+let maplocalleader = ","
+
+set wildignore+=.git,*.class,*/generated-code/*,*/target/*,*/dist/*
+
+" a search like '/' but escapes special characters
+command! -nargs=1 SS let @/ = '\V'.escape(<q-args>, '/\')|normal! /<C-R>/<CR>
+
+" search for tags files in reasonable places
+set tags=./.tags,.tags,./tags,tags
+
+if &term =~ '256color'
+  " Disable Background Color Erase (BCE) so that color schemes
+  " work properly when Vim is used inside tmux and GNU screen.
+  " See also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
+
+" make ctrl-p use tags by default
+nnoremap <leader>t :CtrlP<CR>
+nnoremap <leader>pt :CtrlPTag<CR>
+" let ctrl-p searches use ctags, etc
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'bookmarkdir']
+
+" ack.vim
+nnoremap <leader>a :Ack! 
+nnoremap <leader>as :Ack! --scala 
+nnoremap <leader>afs yiw:Ack! --scala <C-r>"<CR>
+
+" open a tag in a vertical split
+nnoremap <leader>v :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+" undo file changes from fugitive commit view
+autocmd FileType gitcommit nmap <buffer> U :Git checkout -- <C-r><C-g><CR>
+
+let g:airline_powerline_fonts = 1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
+" Use ":DiffOrig" to see the differences
+" between the current buffer and the file it was loaded from.
+command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
+\ | diffthis | wincmd p | diffthis
+
+" completion stuff
+" http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+:set completeopt=longest,menuone
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
+let local_vim_config = $HOME . '/.vim/vimrc.local'
+if filereadable(local_vim_config)
+ execute "source " . local_vim_config
+endif
+
+" configure ack.vim to use ag
+if executable('ag')
+  let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
+
+" configure ctlp to use ag
+let g:ctrlp_user_command = 'ag %s --nocolor --nogroup --hidden -g ""'
+
+let g:vim_markdown_folding_disabled=1
