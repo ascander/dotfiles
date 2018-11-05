@@ -17,7 +17,6 @@ let
       silver-searcher
 
       pkgs.bash
-      #pkgs.silver-searcher
       pkgs.gnupg
       pkgs.pinentry
       pkgs.reattach-to-user-namespace
