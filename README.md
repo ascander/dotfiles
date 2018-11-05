@@ -35,7 +35,7 @@ chsh -s "$HOME/.nix-profile/bin/zsh"
 
 ### import terminal settings
 
-In Terminal settings, import ~/code/dotfiles/resources/cody-mac-terminal-settings.terminal
+In Terminal settings, import `~/code/dotfiles/resources/cody-mac-terminal-settings.terminal` and make it the default profile.
 
 ## thanks
 
