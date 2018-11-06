@@ -78,8 +78,8 @@ fi
 # Customize to your needs...
 #
 # Source local zshrc.
-if [[ -s "${ZDOTDIR:-$HOME}/.zshrc.local" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zshrc.local"
+if [[ -s "$HOME/.zshrc.local" ]]; then
+  source "$HOME/.zshrc.local"
 fi
 
 # kj to go into normal mode on the command line
