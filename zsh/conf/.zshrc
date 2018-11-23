@@ -91,6 +91,9 @@ bindkey '^R' history-incremental-search-backward
 # prompt when overwriting files
 alias cp='cp -i'
 
+# run emacs in terminal mode
+alias emacs='emacs -nw'
+
 # 256 color terminal
 export TERM=xterm-256color
 

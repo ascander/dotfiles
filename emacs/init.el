@@ -62,6 +62,7 @@
     )
 )
 ; Targets include this file and any file contributing to the agenda - up to N levels deep
+(setq org-refile-use-outline-path 'file)
 (setq org-refile-targets (quote ((nil :maxlevel . 1)
                                  (org-agenda-files :maxlevel . 1)
                                  ("~/todo/maybe-someday.org" :maxlevel . 1)
