@@ -5,3 +5,6 @@ fi
 
 # only show terminal scrollbar when scrolling
 defaults write com.apple.Terminal AppleShowScrollBars -string WhenScrolling
+
+# don't make annoying sounds when emptying trash or taking a screenshot
+defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
