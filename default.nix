@@ -15,6 +15,7 @@ let
       vim
       zsh
       silver-searcher
+      emacs
 
       pkgs.bash
       pkgs.gnupg
@@ -62,7 +63,6 @@ let
     { inherit
         makeWrapper
         symlinkJoin
-        writeText
         ;
       tmux = pkgs.tmux;
     });
@@ -71,6 +71,15 @@ let
     {
       neovim = pkgs.neovim;
       vimPlugins = pkgs.vimPlugins;
+    });
+
+  emacs = import ./emacs (with pkgs;
+    { inherit
+        makeWrapper
+        symlinkJoin
+      ;
+      emacsWithPackages = (pkgs.emacsPackagesNgGen pkgs.emacs).emacsWithPackages;
+      epkgs = pkgs.epkgs.melpaStablePackages;
     });
 
 in
