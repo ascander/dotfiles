@@ -48,13 +48,15 @@
 (setq org-agenda-span 8)
 (setq org-agenda-start-on-weekday nil)
 
+(setq org-log-done 'time)
+
 (define-key global-map "\C-cc" 'org-capture)
 
 (setq initial-major-mode 'org-mode)
 
 (setq org-capture-templates
   '(("t" "todo" entry (file "~/todo/refile.org")
-     "* TODO %?\n\t%U\n")
+     "* TODO %?\n  %U\n")
     ("c" "todo (with capture)" entry (file "~/todo/refile.org")
      "* TODO %?\n%U\n%(shell-command-to-string \"pbpaste\")\n")
     ("n" "note" entry (file "~/todo/refile.org")
