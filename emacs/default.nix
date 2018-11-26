@@ -7,6 +7,7 @@ let
   my-emacs = emacsWithPackages (epkgs: (with epkgs; [
     evil
     evil-org
+    helm
     key-chord
     linum-relative
     magit

@@ -156,7 +156,7 @@
                       (org-tags-match-list-sublevels nil))))
               nil)
               ("y" "Yesterday" tags (concat "+TODO=\"DONE\"" "+CLOSED>=\"" (format-time-string "[%Y-%m-%d]" (time-subtract (current-time) (days-to-time 1))) "\"")
-               ((org-agenda-overriding-header "Yeseterday")
+               ((org-agenda-overriding-header "Yesterday")
                 (org-tags-match-list-sublevels t))))))
 
 (defun bh/find-project-task ()
