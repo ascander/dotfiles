@@ -2,7 +2,7 @@
 # It is not meant to replace the gitignore file for an individual project.
 
 # my stuff
-cody-shell.nix
+my-shell.nix
 CodyScratchSpec.scala
 cody.sbt
 .zshrc.local
