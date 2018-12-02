@@ -49,6 +49,7 @@
 (setq org-agenda-start-on-weekday nil)
 
 (setq org-log-done 'time)
+(setq org-agenda-start-with-log-mode t)
 
 (define-key global-map "\C-cc" 'org-capture)
 
