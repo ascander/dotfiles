@@ -18,6 +18,7 @@ let
       emacs
 
       pkgs.bash
+      pkgs.cacert
       pkgs.gnupg
       pkgs.pinentry
       pkgs.reattach-to-user-namespace
