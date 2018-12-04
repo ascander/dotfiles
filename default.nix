@@ -16,6 +16,7 @@ let
       zsh
       silver-searcher
       emacs
+      metals
 
       pkgs.bash
       pkgs.cacert
@@ -28,6 +29,7 @@ let
       pkgs.nix
       pkgs.tree
       pkgs.gitAndTools.hub
+      pkgs.openjdk
     ];
 
   ## Some customizations
@@ -72,6 +74,8 @@ let
     {
       neovim = pkgs.neovim;
       vimPlugins = pkgs.vimPlugins;
+      buildVimPluginFrom2Nix = pkgs.vimUtils.buildVimPluginFrom2Nix;
+      fetchFromGitHub = pkgs.fetchFromGitHub;
     });
 
   emacs = import ./emacs (with pkgs;
@@ -82,6 +86,18 @@ let
       emacsWithPackages = (pkgs.emacsPackagesNgGen pkgs.emacs).emacsWithPackages;
       epkgs = pkgs.epkgs.melpaStablePackages;
     });
+
+    metals = import ./metals (with pkgs;
+      { inherit
+          stdenv
+          lib
+          fetchurl
+          coursier
+          jdk
+          jre
+          makeWrapper
+        ;
+      });
 
 in
   if pkgs.lib.inNixShell

@@ -120,3 +120,12 @@ endif
 let g:ctrlp_user_command = 'ag %s --nocolor --nogroup --hidden --ignore .git/ -g ""'
 
 let g:vim_markdown_folding_disabled=1
+
+" LSP
+let g:lsc_enable_autocomplete = v:false
+let g:lsc_server_commands = {
+  \ 'scala': 'metals-vim'
+  \}
+let g:lsc_auto_map = {
+  \ 'GoToDefinition': 'gd',
+  \}
