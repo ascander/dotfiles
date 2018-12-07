@@ -21,6 +21,10 @@
 (setq ensime-startup-notification nil)
 (setq org-pomodoro-finished-sound-p nil)
 
+;; line numbers
+(setq-default display-line-numbers 'visual)
+(setq-default linum-relative-current-symbol "")
+
 (require 'evil)
   (evil-mode 1)
 
