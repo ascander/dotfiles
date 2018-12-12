@@ -100,8 +100,9 @@ command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_
 \ | diffthis | wincmd p | diffthis
 
 " completion stuff
+set omnifunc=syntaxcomplete#Complete
 " http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
-:set completeopt=longest,menuone
+set completeopt=longest,menuone
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 

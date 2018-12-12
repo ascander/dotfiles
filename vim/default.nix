@@ -3,7 +3,6 @@
 
 let
   customRumtimeSetting = "let &runtimepath.=','.'${./rumtime}'";
-
 in
   neovim.override {
     vimAlias = true;
@@ -16,6 +15,7 @@ in
           vim-markdown
           vim-scala
           vim-fugitive
+          vim-rhubarb
           vim-surround
           vim-airline
           vim-airline-themes
