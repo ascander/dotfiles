@@ -16,7 +16,7 @@ let
       zsh
       silver-searcher
       emacs
-      metals
+      metals-vim
 
       pkgs.bash
       pkgs.cacert
@@ -87,14 +87,11 @@ let
       epkgs = pkgs.epkgs.melpaStablePackages;
     });
 
-    bare-metals = pkgs.callPackage ./metals {};
+    metals = pkgs.callPackage ./metals {};
 
-    metals = import ./metals/metals-wrapped.nix (with pkgs;
-      { inherit
-          symlinkJoin
-          makeWrapper;
-        metals = bare-metals;
-    });
+    metals-vim = pkgs.callPackage ./metals/metals-vim.nix {
+      metals = metals;
+    };
 
 in
   if pkgs.lib.inNixShell

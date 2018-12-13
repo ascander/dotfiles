@@ -1,7 +1,7 @@
 { stdenv, lib, fetchurl, coursier, jdk, jre, makeWrapper }:
 
 let
-  baseName = "metals-vim";
+  baseName = "metals";
   version = "0.3.1";
   deps = stdenv.mkDerivation {
     name = "${baseName}-deps-${version}";
