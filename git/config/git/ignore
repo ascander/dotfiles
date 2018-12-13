@@ -13,6 +13,8 @@ cody.sbt
 .idea/
 .idea_modules/
 .tags
+.metals/
+.bloop/
 .ensime
 .ensime_cache/
 ensime.sbt
