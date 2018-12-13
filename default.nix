@@ -87,17 +87,14 @@ let
       epkgs = pkgs.epkgs.melpaStablePackages;
     });
 
-    metals = import ./metals (with pkgs;
+    bare-metals = pkgs.callPackage ./metals {};
+
+    metals = import ./metals/metals-wrapped.nix (with pkgs;
       { inherit
-          stdenv
-          lib
-          fetchurl
-          coursier
-          jdk
-          jre
-          makeWrapper
-        ;
-      });
+          symlinkJoin
+          makeWrapper;
+        metals = bare-metals;
+    });
 
 in
   if pkgs.lib.inNixShell

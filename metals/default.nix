@@ -30,18 +30,22 @@ stdenv.mkDerivation rec {
     makeWrapper ${jre}/bin/java $out/bin/metals-vim \
       --prefix PATH : ${lib.makeBinPath [ jdk ]} \
       --add-flags "-cp $CLASSPATH scala.meta.metals.Main" \
-      --add-flags "-XX:+UseG1GC" \
-      --add-flags "-XX:+UseStringDeduplication" \
-      --add-flags "-Xss4m" \
-      --add-flags "-Xms1G" \
-      --add-flags "-Xmx4G" \
-      --add-flags "-Dmetals.client=vim-lsc"
   '';
 
   meta = with stdenv.lib; {
     homepage = https://scalameta.org/metals/;
     license = licenses.asl20;
     description = "Work-in-progress language server for Scala";
+    longDescription = ''
+      This executable includes a minimal number of flags by default, and when
+      using it, you will likely want to pass in additional flags such as:
+        -XX:+UseG1GC
+        -XX:+UseStringDeduplication
+        -Xss4m
+        -Xms1G
+        -Xmx4G
+        -Dmetals.client=vim-lsc
+    '';
     maintainers = [
       {
         email = "ceedubs@gmail.com";
