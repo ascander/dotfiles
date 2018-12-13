@@ -50,10 +50,7 @@ set directory+=~/tmp//
 set directory+=.
 
 " spellcheck Git commit messages
-autocmd BufRead COMMIT_EDITMSG setlocal spell!
-
-" for commit messages, open diff (between current and HEAD) in split window
-autocmd BufRead COMMIT_EDITMSG rightb vert new | set buftype=nofile | set bufhidden=hide | setlocal noswapfile | read !git diff --cached
+autocmd BufRead COMMIT_EDITMSG setlocal spell spelllang=en_us
 
 let mapleader = ";"
 let maplocalleader = ","
