@@ -124,7 +124,7 @@ let g:vim_markdown_folding_disabled=1
 " LSP
 let g:lsc_enable_autocomplete = v:false
 let g:lsc_server_commands = {
-  \ 'scala': 'metals-vim'
+  \ 'scala': 'metals'
   \}
 let g:lsc_auto_map = {
   \ 'GoToDefinition': 'gd',
