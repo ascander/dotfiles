@@ -22,15 +22,16 @@ in
         start = [
           ack-vim
           ctrlp-vim
-          vim-lsc
-          vim-markdown
-          vim-scala
-          vim-fugitive
-          vim-rhubarb
-          vim-surround
+          dhall-vim
           vim-airline
           vim-airline-themes
+          vim-fugitive
+          vim-lsc
+          vim-markdown
           vim-nix
+          vim-rhubarb
+          vim-scala
+          vim-surround
         ];
       };
     };
