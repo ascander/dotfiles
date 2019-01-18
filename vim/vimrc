@@ -129,3 +129,7 @@ let g:lsc_server_commands = {
 let g:lsc_auto_map = {
   \ 'GoToDefinition': 'gd',
   \}
+
+" rainbow parentheses
+" https://github.com/luochen1990/rainbow
+let g:rainbow_active = 1

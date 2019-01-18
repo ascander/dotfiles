@@ -23,6 +23,7 @@ in
           ack-vim
           ctrlp-vim
           dhall-vim
+          rainbow
           vim-airline
           vim-airline-themes
           vim-fugitive
