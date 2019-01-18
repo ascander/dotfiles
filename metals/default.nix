@@ -2,19 +2,20 @@
 
 let
   baseName = "metals";
-  version = "0.3.3";
+  version = "0.3.3+130-135e36d6-SNAPSHOT";
   deps = stdenv.mkDerivation {
     name = "${baseName}-deps-${version}";
     buildCommand = ''
       export COURSIER_CACHE=$(pwd)
       ${coursier}/bin/coursier fetch org.scalameta:metals_2.12:${version} \
+        -r sonatype:snapshots \
         -r "bintray:scalacenter/releases" > deps
       mkdir -p $out/share/java
       cp -n $(< deps) $out/share/java/
     '';
     outputHashMode = "recursive";
     outputHashAlgo = "sha256";
-    outputHash     = "1qriwx21dgcl0r4gway9lkmryhzaaznmjdy31blbwln99ipw52kv";
+    outputHash     = "16w122s5lag58gnb5yblng7hzlzlz1ynjsi2yzi77250hhnv9k4y";
   };
 in
 stdenv.mkDerivation rec {
