@@ -130,9 +130,7 @@ let g:lsc_enable_autocomplete = v:false
 let g:lsc_server_commands = {
   \ 'scala': 'metals'
   \}
-let g:lsc_auto_map = {
-  \ 'GoToDefinition': 'gd',
-  \}
+let g:lsc_auto_map = v:true
 
 " rainbow parentheses
 " https://github.com/luochen1990/rainbow
