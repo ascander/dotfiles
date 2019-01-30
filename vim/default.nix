@@ -26,6 +26,7 @@ in
           rainbow
           vim-airline
           vim-airline-themes
+          vim-easy-align
           vim-fugitive
           vim-lsc
           vim-markdown
