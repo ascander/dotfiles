@@ -13,8 +13,9 @@ set nohlsearch
 " don't highlight matching parentheses/brackets
 let loaded_matchparen=1
 
-" display relative line numbers
-set relativenumber
+" display hybrid line numbers
+" (relative but current line shows absolute line number)
+set number relativenumber
 
 " with vsplit, have new window on the right
 set splitright
@@ -28,8 +29,6 @@ cnoremap kj <C-c>
 xnoremap kj <C-c>
 snoremap kj <Esc>
 
-" 2 <C-g> is more helpful than <C-g>
-"noremap <C-g> 2<C-g>
 set laststatus=2
 let g:airline_theme='bubblegum'
 
