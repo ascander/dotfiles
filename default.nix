@@ -85,6 +85,7 @@ let
 
       bash
       cacert
+      fzf
       gnupg
       pinentry
       reattach-to-user-namespace

@@ -21,8 +21,9 @@ in
       packages.myVimPackage = with vimPlugins; {
         start = [
           ack-vim
-          ctrlp-vim
           dhall-vim
+          fzf-vim
+          fzfWrapper
           rainbow
           vim-airline
           vim-airline-themes

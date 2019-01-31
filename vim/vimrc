@@ -69,18 +69,10 @@ if &term =~ '256color'
   set t_ut=
 endif
 
-" make ctrl-p use tags by default
-nnoremap <leader>t :CtrlP<CR>
-nnoremap <leader>pt :CtrlPTag<CR>
-" let ctrl-p searches use ctags, etc
-let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'bookmarkdir']
-
-" configure ctlp to use ag
-let g:ctrlp_user_command = 'ag %s --nocolor --nogroup --hidden --ignore .git/ -g ""'
-
-" allow ctrlp to return more results than usual
-" https://github.com/kien/ctrlp.vim/issues/187
-let g:ctrlp_match_window = 'results:50'
+" Bind fzf file search to my old ctrl-p mapping because habits.
+" Attempts a git-aware search and falls back to a normal file search if we
+" aren't in a git repo.
+nnoremap <expr> <leader>t (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<CR>"
 
 " ack.vim
 nnoremap <leader>a :Ack! 
