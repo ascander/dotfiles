@@ -13,6 +13,16 @@ let
       sha256 = "03rjbgj8647pvr1p2dqrp13z5793ivkb0ajwc65r604wgr5nva8j";
     };
   };
+
+  custom-vim-test = buildVimPluginFrom2Nix {
+    name = "vim-test-2019-01-31";
+    src = fetchFromGitHub {
+      owner = "janko-m";
+      repo = "vim-test";
+      rev = "7e5e118720be538fd560dee8bf34c3f139f2b037";
+      sha256 = "11k0dvbs4kc448ff2a61q7rgprhiv28rxbbs1g20ljhafzfz52q3";
+    };
+  };
 in
   neovim.override {
     vimAlias = true;
@@ -35,6 +45,7 @@ in
           vim-rhubarb
           vim-scala
           vim-surround
+          custom-vim-test
         ];
       };
     };

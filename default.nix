@@ -93,6 +93,7 @@ let
       gawk
       less
       nix
+      sbt
       tree
       gitAndTools.hub
       openjdk

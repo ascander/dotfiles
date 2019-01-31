@@ -127,3 +127,6 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" vim-test conf
+let g:test#scala#sbttest#file_pattern = '\v^(.*spec.*|.*test.*|.*suite.*)\c\.scala$'
