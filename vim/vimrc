@@ -10,6 +10,9 @@ set backspace=indent,eol,start
 
 set nohlsearch
 
+" show previews of substitutions
+set inccommand=nosplit
+
 " don't highlight matching parentheses/brackets
 let loaded_matchparen=1
 
