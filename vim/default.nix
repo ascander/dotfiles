@@ -23,6 +23,16 @@ let
       sha256 = "11k0dvbs4kc448ff2a61q7rgprhiv28rxbbs1g20ljhafzfz52q3";
     };
   };
+
+  vimux = buildVimPluginFrom2Nix {
+    name = "vimux-2019-01-31";
+    src = fetchFromGitHub {
+      owner = "benmills";
+      repo = "vimux";
+      rev = "37f41195e6369ac602a08ec61364906600b771f1";
+      sha256 = "0k7ymak2ag67lb4sf80y4k35zj38rj0jf61bf50i6h1bgw987pra";
+    };
+  };
 in
   neovim.override {
     vimAlias = true;
@@ -45,6 +55,7 @@ in
           vim-rhubarb
           vim-scala
           vim-surround
+          vimux
           custom-vim-test
         ];
       };
