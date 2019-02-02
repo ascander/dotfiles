@@ -133,3 +133,23 @@ nmap ga <Plug>(EasyAlign)
 
 " vim-test conf
 let g:test#scala#sbttest#file_pattern = '\v^(.*spec.*|.*test.*|.*suite.*)\c\.scala$'
+
+" Warning: this is really hacky.
+" SBT takes quite a while to start up, so I'd prefer to not start a fresh SBT
+" session every time we try to run a test with vim-test. If we already have a
+" Vimux runner available and we are trying to run an SBT command, I'm going to
+" assume that the Vimux runner window already has an SBT session open, and we
+" are going to use it.
+function! CustomVimuxStrategy(cmd)
+  if (_VimuxNearestIndex() != -1) && (a:cmd =~ '^\s*sbt')
+    let l:strippedSbt = substitute(a:cmd, '\v^\s*sbt "|"$', '', 'g')
+    let l:strippedDoubleQuotes = substitute(l:strippedSbt, '[^\]"', '', 'g')
+    let l:unescapedDoubleQuotes = substitute(l:strippedDoubleQuotes, '\\"', '"', 'g')
+    call VimuxRunCommand(l:unescapedDoubleQuotes)
+  else
+    call VimuxRunCommand(a:cmd)
+  endif
+endfunction
+
+let g:test#custom_strategies = {'custom-vimux': function('CustomVimuxStrategy')}
+let g:test#strategy = 'custom-vimux'
