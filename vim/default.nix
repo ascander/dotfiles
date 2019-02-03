@@ -14,7 +14,7 @@ let
     };
   };
 
-  custom-vim-test = buildVimPluginFrom2Nix {
+  vim-test-custom = buildVimPluginFrom2Nix {
     name = "vim-test-2019-01-31";
     src = fetchFromGitHub {
       owner = "janko-m";
@@ -48,6 +48,7 @@ in
           vim-airline
           vim-airline-themes
           vim-easy-align
+          vim-easymotion
           vim-fugitive
           vim-lsc
           vim-markdown
@@ -55,8 +56,8 @@ in
           vim-rhubarb
           vim-scala
           vim-surround
+          vim-test-custom
           vimux
-          custom-vim-test
         ];
       };
     };
