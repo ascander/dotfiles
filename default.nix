@@ -68,6 +68,8 @@ let
       });
 
       metals = pkgs.callPackage ./metals {};
+
+      fzf = pkgs.callPackage ./fzf {};
   };
 
   # The list of packages to be installed

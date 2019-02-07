@@ -73,9 +73,7 @@ if &term =~ '256color'
 endif
 
 " Bind fzf file search to my old ctrl-p mapping because habits.
-" Attempts a git-aware search and falls back to a normal file search if we
-" aren't in a git repo.
-nnoremap <expr> <leader>t (len(system('git rev-parse')) ? ':Files' : ':GFiles')."\<CR>"
+nnoremap <leader>t :Files<CR>
 
 " ack.vim
 nnoremap <leader>a :Ack! 
