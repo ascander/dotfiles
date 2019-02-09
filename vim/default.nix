@@ -5,12 +5,12 @@ let
   customRumtimeSetting = "let &runtimepath.=','.'${./rumtime}'";
 
   vim-lsc = buildVimPluginFrom2Nix {
-    name = "vim-lsc-2018-12-12";
+    name = "vim-lsc-2019-02-09";
     src = fetchFromGitHub {
       owner = "natebosch";
       repo = "vim-lsc";
-      rev = "fe6d3bd6328d60cfe8c799a10c35f11153c082c9";
-      sha256 = "03rjbgj8647pvr1p2dqrp13z5793ivkb0ajwc65r604wgr5nva8j";
+      rev = "7a203d7787b86da19a2f74ba4dc9073dfe665ab1";
+      sha256 = "07q8w93wl4xx6zg5p1nz1jrmbqhb47bj5r6l14is7jbzw29qfnhw";
     };
   };
 
