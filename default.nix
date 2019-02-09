@@ -14,62 +14,38 @@ let
   }) {};
 
   custom = rec {
+    inherit (pkgs) callPackage;
+
     # A custom '.bashrc' (see bashrc/default.nix for details)
-    bashrc = pkgs.callPackage ./bashrc {};
+    bashrc = callPackage ./bashrc {};
 
     # Git with config baked in
-    git = import ./git (
-      { inherit (pkgs) makeWrapper symlinkJoin;
-        git = pkgs.git;
-      });
+    git = callPackage ./git {};
 
     # silver-searcher with environment setup
-    silver-searcher = import ./silver-searcher (
-      { inherit (pkgs) makeWrapper symlinkJoin;
-        silver-searcher = pkgs.silver-searcher;
-      });
+    silver-searcher = callPackage ./silver-searcher {};
 
     # custom prezto
-    zsh-prezto = import ./zsh/prezto.nix (
-      { inherit (pkgs) stdenv fetchgit; }
-    );
+    zsh-prezto = callPackage ./zsh/prezto.nix {};
 
     # Zsh with config baked in
-    zsh = import ./zsh (
-      { inherit (pkgs) makeWrapper symlinkJoin;
-        zsh = pkgs.zsh;
-        zsh-prezto = zsh-prezto;
-      });
+    zsh = callPackage ./zsh { inherit zsh-prezto; };
 
     # Tmux with a custom tmux.conf baked in
-    tmux = import ./tmux (with pkgs;
-      { inherit
-          makeWrapper
-          symlinkJoin
-          ;
-        tmux = pkgs.tmux;
-      });
+    tmux = callPackage ./tmux {};
 
-    vim = import ./vim (
-      {
-        neovim = pkgs.neovim;
-        vimPlugins = pkgs.vimPlugins;
-        buildVimPluginFrom2Nix = pkgs.vimUtils.buildVimPluginFrom2Nix;
-        fetchFromGitHub = pkgs.fetchFromGitHub;
-      });
+    vim = callPackage ./vim {
+      inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+    };
 
-    emacs = import ./emacs (with pkgs;
-      { inherit
-          makeWrapper
-          symlinkJoin
-        ;
-        emacsWithPackages = (pkgs.emacsPackagesNgGen pkgs.emacs).emacsWithPackages;
-        epkgs = pkgs.epkgs.melpaStablePackages;
-      });
+    emacs = callPackage ./emacs {
+      emacsWithPackages = (pkgs.emacsPackagesNgGen pkgs.emacs).emacsWithPackages;
+      epkgs = pkgs.epkgs.melpaStablePackages;
+    };
 
-      metals = pkgs.callPackage ./metals {};
+    metals = pkgs.callPackage ./metals {};
 
-      fzf = pkgs.callPackage ./fzf {};
+    fzf = pkgs.callPackage ./fzf {};
   };
 
   # The list of packages to be installed
@@ -100,8 +76,6 @@ let
       gitAndTools.hub
       openjdk
     ];
-
-  ## Some customizations
 
 in
   if pkgs.lib.inNixShell
