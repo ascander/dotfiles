@@ -45,6 +45,7 @@ in
           fzf-vim
           fzfWrapper
           rainbow
+          vim-abolish
           vim-airline
           vim-airline-themes
           vim-easy-align
