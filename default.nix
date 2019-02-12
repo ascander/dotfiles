@@ -6,10 +6,10 @@ let
   # use a pinned version of nixpkgs for reproducability
   pkgs = import (builtins.fetchGit {
     # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-18.09-darwin-2019-02-08";
+    name = "nixpkgs-18.09-darwin-2019-02-11";
     url = https://github.com/nixos/nixpkgs/;
     # `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-18.09-darwin`
-    rev = "13050bedc49f89ab76a5f72a7c90b4c3af39514e";
+    rev = "168cbb39691cca2822ce1fdb3e8c0183af5c6d0d";
     ref = "release-18.09";
   }) {};
 
