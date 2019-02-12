@@ -3,8 +3,6 @@
 
 # my stuff
 my-shell.nix
-CodyScratchSpec.scala
-cody.sbt
 .zshrc.local
 
 # other stuff
@@ -15,6 +13,4 @@ cody.sbt
 .tags
 .metals/
 .bloop/
-.ensime
-.ensime_cache/
-ensime.sbt
+.git/

@@ -7,6 +7,6 @@ symlinkJoin {
   paths = [ fzf ];
   postBuild = ''
     wrapProgram "$out/bin/fzf" \
-    --set FZF_DEFAULT_COMMAND 'ag -g ""'
+    --set FZF_DEFAULT_COMMAND 'ag --hidden -g ""'
   '';
 }
