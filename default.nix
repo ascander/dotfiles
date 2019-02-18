@@ -6,10 +6,10 @@ let
   # use a pinned version of nixpkgs for reproducability
   pkgs = import (builtins.fetchGit {
     # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-18.09-darwin-2019-02-11";
+    name = "nixpkgs-18.09-darwin-2019-02-16";
     url = https://github.com/nixos/nixpkgs/;
     # `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-18.09-darwin`
-    rev = "168cbb39691cca2822ce1fdb3e8c0183af5c6d0d";
+    rev = "9bd45dddf8171e2fd4288d684f4f70a2025ded19";
     ref = "release-18.09";
   }) {};
 
@@ -64,17 +64,16 @@ let
       bash
       cacert
       fzf
-      gnupg
-      pinentry
-      reattach-to-user-namespace
-      zsh-completions
       gawk
+      gitAndTools.hub
+      gnupg
       less
       nix
-      sbt
-      tree
-      gitAndTools.hub
       openjdk
+      pinentry
+      reattach-to-user-namespace
+      tree
+      zsh-completions
     ];
 
 in
