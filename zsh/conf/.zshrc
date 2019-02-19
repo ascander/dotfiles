@@ -70,6 +70,12 @@ fi
 
 setopt shwordsplit
 
+fpath=(
+  # zsh completion
+  ~/.nix-profile/share/zsh/site-functions
+  $fpath
+)
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -100,8 +106,8 @@ export TERM=xterm-256color
 export GPG_TTY=$(tty)
 
 path=(
-    $path
-    /bin
+  $path
+  /bin
 )
 
 export LANG=en_us.utf-8
