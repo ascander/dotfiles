@@ -25,11 +25,10 @@ let
     # silver-searcher with environment setup
     silver-searcher = callPackage ./silver-searcher {};
 
-    # custom prezto
-    zsh-prezto = callPackage ./zsh/prezto.nix {};
-
     # Zsh with config baked in
-    zsh = callPackage ./zsh { inherit zsh-prezto; };
+    zsh = callPackage ./zsh {
+      pure-prompt = callPackage ./zsh/pure-prompt.nix {};
+    };
 
     # Tmux with a custom tmux.conf baked in
     tmux = callPackage ./tmux {};

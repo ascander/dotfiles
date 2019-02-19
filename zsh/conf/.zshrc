@@ -71,15 +71,14 @@ fi
 setopt shwordsplit
 
 fpath=(
-  # zsh completion
-  ~/.nix-profile/share/zsh/site-functions
+  # zsh completion and themes
+  "$ZDOTDIR/site-functions"
   $fpath
 )
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# prompt theme
+autoload -U promptinit; promptinit
+prompt pure
 
 # Customize to your needs...
 #
