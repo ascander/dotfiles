@@ -4,13 +4,13 @@
 let
 
   # use a pinned version of nixpkgs for reproducability
-  pkgs = import (builtins.fetchGit {
+  pkgs = import (builtins.fetchTarball {
     # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-18.09-darwin-2019-02-16";
-    url = https://github.com/nixos/nixpkgs/;
-    # `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-18.09-darwin`
-    rev = "9bd45dddf8171e2fd4288d684f4f70a2025ded19";
-    ref = "release-18.09";
+    name = "nixpkgs-18.09-2019-02-20";
+    # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-18.09-darwin`
+    url = "https://github.com/nixos/nixpkgs/archive/19a0543c62847c6677c2563fc8c986c1c82f2ea3.tar.gz";
+    # hash obtained with `nix-prefetch-url <url from above>`
+    sha256 = "13ndciddbqi5j6b5pajyx476aq5idpk4jsjaiw76y7ygnqj3y239";
   }) {};
 
   custom = rec {
