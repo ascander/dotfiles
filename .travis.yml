@@ -1,3 +1,20 @@
 language: nix
+sudo: required
 
-script: nix-build --no-out-link
+script: nix-build --verbose --no-out-link
+
+# see https://github.com/travis-ci/travis-ci/issues/6604#issuecomment-419653267
+install: |
+  if [ "$(ls -A $HOME/nix-cache)" ]; then
+    sudo rm -rf /nix/*
+    cp -a $HOME/nix-cache/* /nix
+  fi
+
+before_cache: |
+  if [ ! "$(ls -A $HOME/nix-cache)" ]; then
+    cp -a /nix/* $HOME/nix-cache
+  fi
+
+cache:
+  directories:
+    - $HOME/nix-cache
