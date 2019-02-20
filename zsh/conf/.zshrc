@@ -80,6 +80,9 @@ fpath=(
 autoload -U promptinit; promptinit
 prompt pure
 
+# load completion
+autoload -Uz compinit && compinit
+
 # Customize to your needs...
 #
 # Source local zshrc.
@@ -95,6 +98,9 @@ bindkey '^R' history-incremental-search-backward
 
 # prompt when overwriting files
 alias cp='cp -i'
+
+# pretty ls colors
+alias ls='ls -G'
 
 # run emacs in terminal mode
 alias emacs='emacs -nw'
@@ -116,7 +122,4 @@ export JAVA_OPTS='-Dfile.encoding=utf8'
 
 HISTFILE=$HOME/.zhistory
 
-# remove color codes from input
-function rmColorCodes {
-  perl -pe 's/\e\[?.*?[\@-~]//g'
-}
+source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
