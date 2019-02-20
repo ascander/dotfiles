@@ -10,11 +10,9 @@ let
     helm
     key-chord
     linum-relative
-    magit
     markdown-mode
     org
     spaceline
-    projectile
     color-theme-sanityinc-tomorrow
     which-key
   ]));
