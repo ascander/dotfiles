@@ -19,6 +19,8 @@ let
     # A custom '.bashrc' (see bashrc/default.nix for details)
     bashrc = callPackage ./bashrc {};
 
+    ddgr = callPackage ./ddgr {};
+
     # Git with config baked in
     git = callPackage ./git {};
 
@@ -55,6 +57,7 @@ let
     [
       # Customized packages
       bashrc
+      ddgr
       git
       tmux
       vim
