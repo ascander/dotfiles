@@ -13,6 +13,8 @@ let
     sha256 = "13ndciddbqi5j6b5pajyx476aq5idpk4jsjaiw76y7ygnqj3y239";
   }) {};
 
+  hub = pkgs.gitAndTools.hub;
+
   custom = rec {
     inherit (pkgs) callPackage;
 
@@ -30,6 +32,7 @@ let
     # Zsh with config baked in
     zsh = callPackage ./zsh {
       pure-prompt = callPackage ./zsh/pure-prompt.nix {};
+      hub = hub;
     };
 
     # Tmux with a custom tmux.conf baked in
@@ -70,7 +73,7 @@ let
       cacert
       fzf
       gawk
-      gitAndTools.hub
+      hub
       gnupg
       less
       nix
