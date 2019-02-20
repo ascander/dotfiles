@@ -17,13 +17,6 @@ let
     projectile
     color-theme-sanityinc-tomorrow
     which-key
-
-    # Nix
-    nix-mode
-
-    # Scala
-    scala-mode
-    sbt-mode
   ]));
 
 in
