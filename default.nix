@@ -47,8 +47,11 @@ let
     fzf = pkgs.callPackage ./fzf {};
   };
 
-  # The list of packages to be installed
-  tools = with pkgs; with custom;
+  darwinOnly = with pkgs; [
+    reattach-to-user-namespace
+  ];
+
+  allPlatforms = with pkgs; with custom;
     [
       # Customized packages
       bashrc
@@ -70,10 +73,13 @@ let
       nix
       openjdk
       pinentry
-      reattach-to-user-namespace
       tree
       zsh-completions
     ];
+
+  # The list of packages to be installed
+  tools = with pkgs; with pkgs.lib;
+    allPlatforms ++ optionals stdenv.isDarwin darwinOnly;
 
 in
   if pkgs.lib.inNixShell
