@@ -4,7 +4,7 @@
 { git, symlinkJoin, makeWrapper }:
 symlinkJoin {
   name = "git";
-  buildInputs = [makeWrapper];
+  buildInputs = [ makeWrapper ];
   paths = [ git ];
   postBuild = ''
     wrapProgram "$out/bin/git" \

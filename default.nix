@@ -13,31 +13,39 @@ let
     sha256 = "13ndciddbqi5j6b5pajyx476aq5idpk4jsjaiw76y7ygnqj3y239";
   }) {};
 
+  unstable-pkgs = import (builtins.fetchTarball {
+    # Descriptive name to make the store path easier to identify
+    name = "nixpkgs-18.09-2019-02-23";
+    # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-unstable`
+    url = "https://github.com/nixos/nixpkgs/archive/44f78998bbbf7fdf1262442ca9f3f7db11ae2516.tar.gz";
+    # hash obtained with `nix-prefetch-url --unpack <url from above>`
+    sha256 = "1iflrjf2hcc96q5cw70xjkq8cw98r69yihhgw52bc2s7ryx4f1ky";
+  }) {};
+
   hub = pkgs.gitAndTools.hub;
 
   custom = rec {
     inherit (pkgs) callPackage;
 
-    # A custom '.bashrc' (see bashrc/default.nix for details)
-    bashrc = callPackage ./bashrc {};
-
-    ddgr = callPackage ./ddgr {};
+    ddgr = unstable-pkgs.ddgr;
 
     # Git with config baked in
     git = callPackage ./git {};
 
-    # silver-searcher with environment setup
-    silver-searcher = callPackage ./silver-searcher {};
+    pijul = callPackage ./pijul {
+      pijul = unstable-pkgs.pijul;
+    };
 
     pure-prompt = callPackage ./zsh/pure-prompt.nix {};
 
+    # silver-searcher with environment setup
+    silver-searcher = callPackage ./silver-searcher {};
+
     # Zsh with config baked in
     zsh = callPackage ./zsh {
-      site-functions = [
-        "${ddgr}/share/zsh/site-functions"
-        "${pure-prompt}/share/zsh/site-functions"
-        "${hub}/share/zsh/site-functions"
-      ];
+      site-functions = builtins.map
+        (p: "${p}/share/zsh/site-functions")
+        [ ddgr pure-prompt hub pijul ];
     };
 
     # Tmux with a custom tmux.conf baked in
@@ -61,31 +69,31 @@ let
     reattach-to-user-namespace
   ];
 
-  allPlatforms = with pkgs; with custom;
+  allPlatforms = with custom;
     [
       # Customized packages
-      bashrc
       ddgr
+      emacs
+      fzf
       git
+      metals
+      pijul
+      silver-searcher
       tmux
       vim
       zsh
-      silver-searcher
-      emacs
-      metals
 
-      bash
-      cacert
-      fzf
-      gawk
+      pkgs.bash
+      pkgs.cacert
+      pkgs.gawk
+      pkgs.gnupg
       hub
-      gnupg
-      less
-      nix
-      openjdk
-      pinentry
-      tree
-      zsh-completions
+      pkgs.less
+      pkgs.nix
+      pkgs.openjdk
+      pkgs.pinentry
+      pkgs.tree
+      pkgs.zsh-completions
     ];
 
   # The list of packages to be installed
@@ -95,9 +103,5 @@ let
 in
   if pkgs.lib.inNixShell
   then pkgs.mkShell
-    { buildInputs = tools;
-      shellHook = ''
-        $(bashrc)
-        '';
-    }
+    { buildInputs = tools; }
   else tools
