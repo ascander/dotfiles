@@ -9,7 +9,7 @@ let
     name = "nixpkgs-18.09-2019-02-20";
     # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-18.09-darwin`
     url = "https://github.com/nixos/nixpkgs/archive/19a0543c62847c6677c2563fc8c986c1c82f2ea3.tar.gz";
-    # hash obtained with `nix-prefetch-url <url from above>`
+    # hash obtained with `nix-prefetch-url --unpack <url from above>`
     sha256 = "13ndciddbqi5j6b5pajyx476aq5idpk4jsjaiw76y7ygnqj3y239";
   }) {};
 
@@ -29,10 +29,15 @@ let
     # silver-searcher with environment setup
     silver-searcher = callPackage ./silver-searcher {};
 
+    pure-prompt = callPackage ./zsh/pure-prompt.nix {};
+
     # Zsh with config baked in
     zsh = callPackage ./zsh {
-      pure-prompt = callPackage ./zsh/pure-prompt.nix {};
-      hub = hub;
+      site-functions = [
+        "${ddgr}/share/zsh/site-functions"
+        "${pure-prompt}/share/zsh/site-functions"
+        "${hub}/share/zsh/site-functions"
+      ];
     };
 
     # Tmux with a custom tmux.conf baked in
