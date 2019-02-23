@@ -1,4 +1,9 @@
-# Zsh with conf files baked in
+/*
+  Zsh with conf files baked in
+
+  site-functions is a list of site-functions directories, for example:
+  [ "${ddgr}/share/zsh/site-functions" "${hub}/share/zsh/site-functions" ]
+*/
 { zsh, symlinkJoin, makeWrapper, zsh-syntax-highlighting, lib, site-functions }:
 symlinkJoin {
   name = "zsh";
