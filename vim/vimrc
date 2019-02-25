@@ -115,7 +115,10 @@ let g:vim_markdown_folding_disabled=1
 " LSP
 let g:lsc_enable_autocomplete = v:false
 let g:lsc_server_commands = {
-  \ 'scala': 'metals'
+  \ 'scala': {
+  \   'command': 'metals',
+  \   'log_level': 'Log'
+  \ }
   \}
 let g:lsc_auto_map = v:true
 

@@ -2,7 +2,7 @@
 
 let
   baseName = "metals";
-  version = "0.4.4";
+  version = "0.4.4+19-4724f2ae-SNAPSHOT";
   deps = stdenv.mkDerivation {
     name = "${baseName}-deps-${version}";
     buildCommand = ''
@@ -15,7 +15,7 @@ let
     '';
     outputHashMode = "recursive";
     outputHashAlgo = "sha256";
-    outputHash     = "1rmgr5vhgmbgbgq58q3a2pnsjv6f118d3a4fa9y35izkd7djwnxa";
+    outputHash     = "06hkj3j46lwfgks0zskyi6cllibvv0k64f36ijxymk32xvzdx1j5";
   };
 in
 stdenv.mkDerivation rec {
