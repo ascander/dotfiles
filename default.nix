@@ -45,7 +45,7 @@ let
     zsh = callPackage ./zsh {
       site-functions = builtins.map
         (p: "${p}/share/zsh/site-functions")
-        [ ddgr pure-prompt hub pijul ];
+        [ ddgr pure-prompt hub pijul pkgs.nix-zsh-completions ];
     };
 
     # Tmux with a custom tmux.conf baked in
@@ -90,6 +90,7 @@ let
       hub
       pkgs.less
       pkgs.nix
+      pkgs.nix-zsh-completions
       pkgs.openjdk
       pkgs.pinentry
       pkgs.tree
