@@ -1,4 +1,0 @@
-language: nix
-sudo: required
-
-script: nix-build --no-out-link
