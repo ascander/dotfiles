@@ -15,7 +15,7 @@
 ```sh
 mkdir ~/code
 cd code
-nix-shell -p git --run 'git clone http://github.com/ceedubs/dotfiles'
+nix-shell -p git --run 'git clone http://gitlab.com/ceedubs/dotfiles.git'
 nix-env -f dotfiles/default.nix -i --remove-all
 ```
 
