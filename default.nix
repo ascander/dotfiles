@@ -43,11 +43,6 @@ let
       reattach-to-user-namespace = if (pkgs.stdenv.isDarwin) then pkgs.reattach-to-user-namespace else null;
     };
 
-    emacs = callPackage ./emacs {
-      emacsWithPackages = (pkgs.emacsPackagesNgGen pkgs.emacs).emacsWithPackages;
-      epkgs = pkgs.epkgs.melpaStablePackages;
-    };
-
     metals = pkgs.callPackage ./metals {};
 
     fzf = pkgs.callPackage ./fzf {};
@@ -93,6 +88,7 @@ let
       pinentry
       pkgs.tree
       pkgs.zsh-completions
+      pkgs.sbt
     ];
 
   # The list of packages to be installed
