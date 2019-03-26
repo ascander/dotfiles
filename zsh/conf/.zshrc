@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='emacs'
+export VISUAL='emacs'
 export PAGER='less'
 
 #
@@ -81,37 +81,25 @@ fpath=(
   $fpath
 )
 
-# prompt theme
-autoload -U promptinit; promptinit
-prompt pure
+# prompt theme; unless inside Emacs
+if [ -z "$INSIDE_EMACS" ]; then
+  autoload -U promptinit; promptinit
+  prompt pure
+else
+  PROMPT="%c❯ " 
+fi
 
 # load completion
 autoload -Uz compinit && compinit
 
+#
 # Customize to your needs...
 #
+
 # Source local zshrc.
 if [[ -s "$HOME/.zshrc.local" ]]; then
   source "$HOME/.zshrc.local"
 fi
-
-# kj to go into normal mode on the command line
-bindkey -M viins 'kj' vi-cmd-mode
-
-# <C-r> for history search
-bindkey '^R' history-incremental-search-backward
-
-# prompt when overwriting files
-alias cp='cp -i'
-
-# pretty ls colors
-alias ls='ls -G'
-
-# run emacs in terminal mode
-alias emacs='emacs -nw'
-
-# delete branches that have been merged to to the current branch
-alias del-merged='git branch --merged HEAD --no-contains HEAD | xargs git branch -d'
 
 # 256 color terminal
 export TERM=xterm-256color
@@ -126,11 +114,54 @@ path=(
 export LANG=en_us.utf-8
 export LC_ALL=en_us.utf-8
 export LC_TYPE=en_us.utf-8
-export JAVA_OPTS='-Dfile.encoding=utf8'
 
 HISTFILE=$HOME/.zhistory
 
 source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-# set up direnv
-eval "$(direnv hook zsh)"
+# Link 'git' to 'hub' if it exists
+if (( $+commands[hub] )); then
+    eval "$(hub alias -s)"
+fi
+
+# Scala settings
+export SBT_OPTS="-Dscala.color -Dmetals.http=true"
+
+# Scalameta Metals setup
+if (( $+commands[metals] )); then
+  export METALS_ENABLED="true"
+fi
+
+# Java settings
+export JAVA_OPTS='-Dfile.encoding=utf8'
+
+# Settings for 'ls'
+#
+# TODO use gls
+export CLICOLOR=1
+export LSCOLORS="exfxcxdxbxegedabagacad"
+
+alias ls='ls -Gh'
+alias lk='ls -lSr'
+alias lt='ls -ltf'
+alias lc='ls -lctr'
+alias lu='ls -ltur'
+alias ll='ls -l'
+alias lr='ll -R'
+alias la='ll -A'
+alias l='ll'
+
+# Miscellaneous aliases
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+alias mkdir='mkdir -p'
+alias c='clear'
+alias du='du -h'
+alias h='history 24'
+alias ds='dirs -v | head -10'
+alias ..='cd ../.'
+alias ...='cd ../../.'
+alias ....='cd ../../../.'
+alias .....='cd ../../../../.'
+
