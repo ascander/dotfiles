@@ -35,7 +35,7 @@ let
     zsh = callPackage ./zsh {
       site-functions = builtins.map
         (p: "${p}/share/zsh/site-functions")
-        [ ddgr pure-prompt hub lab pkgs.nix-zsh-completions ];
+        [ ddgr pure-prompt hub pkgs.nix-zsh-completions ];
     };
 
     # Tmux with a custom tmux.conf baked in
@@ -71,10 +71,9 @@ let
     [
       # Customized packages
       ddgr
-      emacs
       fzf
       git
-      #pijul
+      metals
       silver-searcher
       tmux
       vim
