@@ -39,12 +39,5 @@ stdenv.mkDerivation rec {
     homepage = https://scalameta.org/metals/;
     license = licenses.asl20;
     description = "Work-in-progress language server for Scala";
-    maintainers = [
-      {
-        email = "ceedubs@gmail.com";
-        github = "ceedubs";
-        name = "Cody Allen";
-      }
-    ];
   };
 }
