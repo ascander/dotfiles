@@ -8,10 +8,11 @@ shell.nix
 
 # other stuff
 .DS_Store
-*.xcuserdatad
+*~
+*.swp
 .idea/
 .idea_modules/
-.tags
-.metals/
 .bloop/
+.metals/
 .git/
+.dumbjump
