@@ -76,7 +76,8 @@ let
 
       pkgs.bash
       pkgs.cacert
-      pkgs.direnv
+      pkgs.coreutils-prefixed
+      pkgs.fasd
       pkgs.gawk
       pkgs.gnupg
       hub
@@ -88,7 +89,6 @@ let
       pinentry
       pkgs.tree
       pkgs.zsh-completions
-      pkgs.sbt
     ];
 
   # The list of packages to be installed
