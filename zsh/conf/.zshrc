@@ -119,42 +119,33 @@ HISTFILE=$HOME/.zhistory
 
 source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-# # Set up Emacs if we've installed a current version in the usual place
-# if [ -d "/Applications/Emacs.app" ]; then
-#     alias installed_emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
-#     alias installed_emacsclient="/Applications/Emacs.app/Contents/MacOS/bin/emacsclient"
-# 
-#     _emacsfun() {
-#         # Get a list of Emacs frames
-#         frameslist=`installed_emacsclient --alternate-editor '' --eval '(frame-list)' 2>/dev/null | egrep -o '(frame)+'`
-# 
-#         if [ "$(echo "$frameslist" | sed -n '$=')" -ge 2 ]; then
-#             # Prevent creating another frame if there is at least one present
-#             installed_emacsclient --alternate-editor "" "$@"
-#         else
-#             # Create a new frame otherwise
-#             installed_emacsclient --alternate-editor "" --create-frame "$@"
-#         fi
-#     }
-# 
-#     _emacslauncher() {
-#         if [ "$#" -ge "2" -a "$2" = "-" ]; then
-#             tempfile="$(mktemp emacs-stdin-$USER.XXXXXXX --tmpdir)"
-#             cat - > "$tempfile"
-#             _emacsfun --no-wait "$tempfile"
-#         else
-#             _emacsfun "$@"
-#         fi
-#     }
-# 
-#     export EMACS_LAUNCHER=_emacslauncher
-#     export EDITOR="${EDITOR:-${EMACS_LAUNCHER}}"
-#     
-#     alias emacs="$EMACS_LAUNCHER --no-wait" # route Emacs to use the launcher
-#     alias e=emacs                           # for convenience
-#     alias te="$EMACS_LAUNCHER -nw"          # in a terminal (if you have to)
-#     alias eeval="$EMACS_LAUNCHER --eval"    # like running `M-x eval` from outside Emacs
-# fi
+# Set up Emacs if a current version has been installed (like by Nix or something...)
+EMACS_VERSION=$(emacs --version | awk 'NR == 1 { print $3 }')
+REQUIRED_EMACS_VERSION="26"
+
+if [ "$(echo -e "$EMACS_VERSION\n$REQUIRED_EMACS_VERSION" | sort -V | head -n1)" -ge "$REQUIRED_EMACS_VERSION" ]; then
+  _emacsfun() {
+    # Get a list of Emacs frames
+    frameslist="$(emacsclient --alternate-editor '' --eval '(frame-list)' 2>/dev/null | egrep -o '(frame)+')"
+
+    if [ "$(echo "$frameslist" | sed -n '$=')" -ge 2 ]; then
+      # Prevent creating another frame if there is at least one present
+      emacsclient --alternate-editor "" "$@"
+    else
+      # Create a new frame otherwise
+      emacsclient --alternate-editor "" --create-frame "$@"
+    fi
+  }
+
+  # Set env for Emacs
+  export EMACS_LAUNCHER=_emacsfun
+  export EDITOR="${EDITOR:-${EMACS_LAUNCHER}}"
+
+  # Set some aliases
+  alias emacs="$EMACS_LAUNCHER --no-wait"
+  alias temacs="$EMACS_LAUNCHER -nw"
+  alias eeval="$EMACS_LAUNCHER --eval"
+fi
 
 # Initialize fasd
 eval "$(fasd --init auto)"
