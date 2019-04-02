@@ -77,6 +77,7 @@ let
       pkgs.bash
       pkgs.cacert
       pkgs.coreutils-prefixed
+      pkgs.emacs
       pkgs.fasd
       pkgs.gawk
       pkgs.gnupg

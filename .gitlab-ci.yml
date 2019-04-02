@@ -1,3 +1,0 @@
-build:
-  image: nixos/nix:2.2.1
-  script: nix-build --no-out-link
