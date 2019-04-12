@@ -1,5 +1,5 @@
 # Vim, with a set of extra packages (extraPackages) and a custom vimrc
-{ neovim, vimPlugins, buildVimPluginFrom2Nix, fetchFromGitHub, nodejs, yarn, yarn2nix }:
+{ neovim, vimPlugins, buildVimPluginFrom2Nix, fetchFromGitHub, makeWrapper, nodejs, symlinkJoin, yarn, yarn2nix }:
 
 let
   customRumtimeSetting = "let &runtimepath.=','.'${./rumtime}'";
@@ -27,8 +27,7 @@ let
       sha256 = "0k7ymak2ag67lb4sf80y4k35zj38rj0jf61bf50i6h1bgw987pra";
     };
   };
-in
-  neovim.override {
+  neovim-unwrapped = neovim.override {
     vimAlias = true;
     configure = {
       customRC = customRumtimeSetting + "\n" + builtins.readFile ./vimrc;
@@ -56,4 +55,16 @@ in
         ];
       };
     };
+  };
+in
+  symlinkJoin {
+    name = "nvim";
+    buildInputs = [ makeWrapper ];
+    paths = [ neovim-unwrapped ];
+    postBuild = ''
+      wrapProgram "$out/bin/nvim" \
+      --set XDG_CONFIG_HOME "${./conf}"
+      wrapProgram "$out/bin/vim" \
+      --set XDG_CONFIG_HOME "${./conf}"
+    '';
   }
