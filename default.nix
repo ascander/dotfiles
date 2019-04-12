@@ -51,10 +51,6 @@ let
     # Tmux with a custom tmux.conf baked in
     tmux = callPackage ./tmux {};
 
-    vim = callPackage ./vim {
-      inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
-    };
-
     emacs = callPackage ./emacs {
       emacsWithPackages = (pkgs.emacsPackagesNgGen pkgs.emacs).emacsWithPackages;
       epkgs = pkgs.epkgs.melpaStablePackages;
@@ -63,6 +59,18 @@ let
     metals = pkgs.callPackage ./metals {};
 
     fzf = pkgs.callPackage ./fzf {};
+
+    yarn2nix = pkgs.callPackage (pkgs.fetchFromGitHub {
+      owner = "moretea";
+      repo = "yarn2nix";
+      rev = "780e33a07fd821e09ab5b05223ddb4ca15ac663f";
+      sha256 = "1f83cr9qgk95g3571ps644rvgfzv2i4i7532q8pg405s4q5ada3h";
+    }) {};
+
+    vim = callPackage ./vim {
+      inherit yarn2nix;
+      inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+    };
   };
 
   darwinOnly = with pkgs; [
