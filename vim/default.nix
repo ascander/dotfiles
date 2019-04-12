@@ -1,17 +1,11 @@
 # Vim, with a set of extra packages (extraPackages) and a custom vimrc
-{ neovim, vimPlugins, buildVimPluginFrom2Nix, fetchFromGitHub }:
+{ neovim, vimPlugins, buildVimPluginFrom2Nix, fetchFromGitHub, nodejs, yarn, yarn2nix }:
 
 let
   customRumtimeSetting = "let &runtimepath.=','.'${./rumtime}'";
 
-  vim-lsc = buildVimPluginFrom2Nix {
-    name = "vim-lsc-2019-04-11";
-    src = fetchFromGitHub {
-      owner = "natebosch";
-      repo = "vim-lsc";
-      rev = "4fd4668966e430946a864eb4e973634b3f506ded";
-      sha256 = "0gz1w7lcvy3rv4h4bfk8fdsa0k1nhxfkzrn2ncapkl210gw0v7zq";
-    };
+  coc-nvim = import ./coc-nvim.nix {
+    inherit buildVimPluginFrom2Nix fetchFromGitHub nodejs yarn yarn2nix;
   };
 
   vim-test-custom = buildVimPluginFrom2Nix {
@@ -41,6 +35,7 @@ in
       packages.myVimPackage = with vimPlugins; {
         start = [
           ack-vim
+          coc-nvim
           dhall-vim
           fzf-vim
           fzfWrapper
@@ -51,7 +46,6 @@ in
           vim-easy-align
           vim-easymotion
           vim-fugitive
-          vim-lsc
           vim-markdown
           vim-nix
           vim-rhubarb
