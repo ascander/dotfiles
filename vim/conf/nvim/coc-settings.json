@@ -1,0 +1,10 @@
+{
+  "suggest.noselect": false,
+  "suggest.enablePreview": true,
+  "languageserver": {
+    "scala": {
+      "command": "metals",
+      "filetypes": [ "scala", "sbt" ]
+    }
+  }
+}
