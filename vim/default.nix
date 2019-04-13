@@ -1,10 +1,10 @@
 # Vim, with a set of extra packages (extraPackages) and a custom vimrc
-{ neovim, vimPlugins, buildVimPluginFrom2Nix, fetchFromGitHub, makeWrapper, nodejs, symlinkJoin, yarn, yarn2nix }:
+{ neovim, vimPlugins, buildVimPluginFrom2Nix, fetchFromGitHub, makeWrapper, metals, nodejs, symlinkJoin, writeText, yarn, yarn2nix }:
 
 let
   customRumtimeSetting = "let &runtimepath.=','.'${./rumtime}'";
 
-  coc-nvim = import ./coc-nvim.nix {
+  coc-nvim = import ./coc-nvim {
     inherit buildVimPluginFrom2Nix fetchFromGitHub nodejs yarn yarn2nix;
   };
 
@@ -27,8 +27,13 @@ let
       sha256 = "0k7ymak2ag67lb4sf80y4k35zj38rj0jf61bf50i6h1bgw987pra";
     };
   };
+
+  coc-settings = import ./coc-nvim/coc-settings.nix { inherit metals; };
+
+  coc-settings-file = writeText "coc-settings.json" (builtins.toJSON coc-settings );
+
   neovim-unwrapped = neovim.override {
-    vimAlias = true;
+    vimAlias = false;
     configure = {
       customRC = customRumtimeSetting + "\n" + builtins.readFile ./vimrc;
       packages.myVimPackage = with vimPlugins; {
@@ -62,9 +67,10 @@ in
     buildInputs = [ makeWrapper ];
     paths = [ neovim-unwrapped ];
     postBuild = ''
+      mkdir -p $out/conf
+      cp ${coc-settings-file} $out/conf/coc-settings.json
       wrapProgram "$out/bin/nvim" \
-      --set XDG_CONFIG_HOME "${./conf}"
-      wrapProgram "$out/bin/vim" \
-      --set XDG_CONFIG_HOME "${./conf}"
+        --set VIMCONFIG "$out/conf"
+      makeWrapper "$out/bin/nvim" "$out/bin/vim"
     '';
   }
