@@ -117,6 +117,9 @@ let g:vim_markdown_folding_disabled=1
 " Smaller updatetime for CursorHold & CursorHoldI
 set updatetime=300
 
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
 " Use `[c` and `]c` for navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
@@ -155,6 +158,9 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Search workspace symbols
 nnoremap <silent> gS  :<C-u>CocList -I symbols<cr>
+
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 
 " rainbow parentheses
 " https://github.com/luochen1990/rainbow
