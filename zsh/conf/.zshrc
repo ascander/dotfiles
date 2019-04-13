@@ -68,9 +68,15 @@ fi
 # Nix
 #
 
+export NIX_PROFILE="${HOME}/.nix-profile"
+
 # Initialize Nix if needed
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
-  . ~/.nix-profile/etc/profile.d/nix.sh;
+if [ -e "${NIX_PROFILE}/etc/profile.d/nix.sh" ]; then
+  . "${NIX_PROFILE}/etc/profile.d/nix.sh";
+
+  # Set some aliases
+  alias ns='nix-shell'
+  alias ne='nix-env'
 fi
 
 setopt shwordsplit
@@ -119,40 +125,42 @@ HISTFILE=$HOME/.zhistory
 
 source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-# Set up Emacs if a current version has been installed (like by Nix or something...)
-EMACS_VERSION=$(emacs --version | awk 'NR == 1 { print $3 }')
-REQUIRED_EMACS_VERSION="26"
 
-if [ "$(echo -e "$EMACS_VERSION\n$REQUIRED_EMACS_VERSION" | sort -V | head -n1)" -ge "$REQUIRED_EMACS_VERSION" ]; then
-  _emacsfun() {
-    # Get a list of Emacs frames
-    frameslist="$(emacsclient --alternate-editor '' --eval '(frame-list)' 2>/dev/null | egrep -o '(frame)+')"
+# Set up Emacs if we're using a Nix-installed version
+if [[ -x "${NIX_PROFILE}/bin/emacsclient" ]]; then
+    # Launches Emacs in a smrt way
+    #
+    # First, check to see if there are any existing Emacs frames. If so, connect
+    # to the existing one. If not, create one. By going through `emacsclient` we
+    # also start the Emacs server if it isn't running.
+    #
+    # Note: the minimum number of frames required is 2. This is not a mistake. If
+    # this is set to 1, Emacs does not successfully connect to the existing frame.
+    # My best guess at explaining this is that running the Emacs daemon consumes a 
+    # frame, and counting actual frames opened is 2-indexed.
+    _emacslauncher() {
+        if [[ "$(emacsclient --alternate-editor "" --eval '(length (frame-list))' 2>/dev/null)" -ge 2 ]]; then
+            emacsclient --alternate-editor "" "$@"
+        else
+            emacsclient --alternate-editor "" --create-frame "$@"
+        fi
+    }
 
-    if [ "$(echo "$frameslist" | sed -n '$=')" -ge 2 ]; then
-      # Prevent creating another frame if there is at least one present
-      emacsclient --alternate-editor "" "$@"
-    else
-      # Create a new frame otherwise
-      emacsclient --alternate-editor "" --create-frame "$@"
-    fi
-  }
+    # Set up environment with smrt Emacs
+    export EDITOR='_emacslauncher --no-wait'
+    export VISUAL='_emacslauncher --no-wait'
 
-  # Set env for Emacs
-  export EMACS_LAUNCHER=_emacsfun
-  export EDITOR="${EDITOR:-${EMACS_LAUNCHER}}"
-
-  # Set some aliases
-  alias emacs="$EMACS_LAUNCHER --no-wait"
-  alias temacs="$EMACS_LAUNCHER -nw"
-  alias eeval="$EMACS_LAUNCHER --eval"
+    # Some aliases
+    alias emacs='_emacslauncher --no-wait'
+    alias e=emacs
+    alias temacs='_emacslauncher --no-wait -nw'
+    alias te=temacs
+    alias eeval='_emacslauncher --eval'
+    alias ke="_emacslauncher --eval '(kill-emacs)'"
 fi
 
 # Initialize fasd
 eval "$(fasd --init auto)"
-
-# fasd aliases
-alias e='f -e emacs'
-alias v='f -e vim'
 
 # Link 'git' to 'hub' if it exists
 if (( $+commands[hub] )); then
@@ -191,7 +199,8 @@ git_current_branch() {
 # Git aliases
 alias g='git'
 
-alias gs='git status -sb'
+alias gs='git status'
+alias gst='git status -sb'
 
 alias ga='git add'
 alias gaa='git add --all'
