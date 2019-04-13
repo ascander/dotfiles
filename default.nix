@@ -68,7 +68,7 @@ let
     }) {};
 
     vim = callPackage ./vim {
-      inherit yarn2nix;
+      inherit metals yarn2nix;
       inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
     };
   };
@@ -84,7 +84,6 @@ let
       emacs
       fzf
       git
-      metals
       pijul
       silver-searcher
       tmux
