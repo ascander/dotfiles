@@ -28,7 +28,7 @@ let
     };
   };
   neovim-unwrapped = neovim.override {
-    vimAlias = true;
+    vimAlias = false;
     configure = {
       customRC = customRumtimeSetting + "\n" + builtins.readFile ./vimrc;
       packages.myVimPackage = with vimPlugins; {
@@ -63,8 +63,7 @@ in
     paths = [ neovim-unwrapped ];
     postBuild = ''
       wrapProgram "$out/bin/nvim" \
-      --set XDG_CONFIG_HOME "${./conf}"
-      wrapProgram "$out/bin/vim" \
-      --set XDG_CONFIG_HOME "${./conf}"
+        --set VIMCONFIG "${./conf}"
+      makeWrapper "$out/bin/nvim" "$out/bin/vim"
     '';
   }
