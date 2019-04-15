@@ -2,8 +2,9 @@
 # It is not meant to replace the gitignore file for an individual project.
 
 # my stuff
-my-shell.nix
 .zshrc.local
+# sometimes I create this for projects that don't have it in source control.
+shell.nix
 
 # other stuff
 .DS_Store
