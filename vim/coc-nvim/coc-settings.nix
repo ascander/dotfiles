@@ -8,5 +8,10 @@
       command = metals + "/bin/metals";
       filetypes = [ "scala" "sbt" ];
     };
+    rust = {
+      command = "rls";
+      filetypes = [ "rs" ];
+    };
   };
+  rust-client.disableRustup = true;
 }
