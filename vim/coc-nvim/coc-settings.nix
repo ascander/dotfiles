@@ -1,8 +1,10 @@
 { metals }:
 
 {
-  suggest.noselect = false;
-  suggest.enablePreview = true;
+  coc.preferences.extensionUpdateCheck = "never";
+
+  diagnostic.errorSign = "🚽";
+
   languageserver = {
     scala = {
       command = metals + "/bin/metals";
@@ -13,5 +15,12 @@
       filetypes = [ "rs" ];
     };
   };
+
+  suggest = {
+    autoTrigger = "trigger";
+    noselect = false;
+    enablePreview = true;
+  };
+
   rust-client.disableRustup = true;
 }

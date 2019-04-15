@@ -10,6 +10,9 @@ set backspace=indent,eol,start
 
 set nohlsearch
 
+" make sign column the same color as line number column
+highlight clear SignColumn
+
 " show previews of substitutions
 set inccommand=nosplit
 
@@ -84,6 +87,10 @@ autocmd FileType gitcommit nmap <buffer> U :Git checkout -- <C-r><C-g><CR>
 let g:airline_powerline_fonts = 1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+let airline#extensions#coc#error_symbol = '🚽 '
+let airline#extensions#coc#warning_symbol = '⚠ '
 
 " Use ":DiffOrig" to see the differences
 " between the current buffer and the file it was loaded from.
