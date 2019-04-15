@@ -8,6 +8,10 @@ let
     inherit buildVimPluginFrom2Nix fetchFromGitHub nodejs yarn yarn2nix;
   };
 
+  coc-rls = import ./coc-nvim/coc-rls.nix {
+    inherit buildVimPluginFrom2Nix fetchFromGitHub nodejs yarn yarn2nix;
+  };
+
   vim-test-custom = buildVimPluginFrom2Nix {
     name = "vim-test-2019-01-31";
     src = fetchFromGitHub {
@@ -40,10 +44,12 @@ let
         start = [
           ack-vim
           coc-nvim
+          coc-rls
           dhall-vim
           fzf-vim
           fzfWrapper
           rainbow
+          rust-vim
           vim-abolish
           vim-airline
           vim-airline-themes
