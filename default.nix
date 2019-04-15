@@ -92,6 +92,7 @@ let
 
       pkgs.bash
       pkgs.cacert
+      pkgs.direnv
       pkgs.gawk
       pkgs.gnupg
       hub

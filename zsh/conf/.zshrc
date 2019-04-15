@@ -123,3 +123,6 @@ export JAVA_OPTS='-Dfile.encoding=utf8'
 HISTFILE=$HOME/.zhistory
 
 source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# set up direnv
+eval "$(direnv hook zsh)"
