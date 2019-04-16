@@ -55,6 +55,7 @@ let
           vim-airline-themes
           vim-easy-align
           vim-easymotion
+          vim-eunuch
           vim-fugitive
           vim-markdown
           vim-nix
