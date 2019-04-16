@@ -6,20 +6,20 @@ let
   # use a pinned version of nixpkgs for reproducability
   pkgs = import (builtins.fetchTarball {
     # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-18.09-2019-02-20";
+    name = "nixpkgs-18.09-2019-04-16";
     # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-18.09-darwin`
-    url = "https://github.com/nixos/nixpkgs/archive/19a0543c62847c6677c2563fc8c986c1c82f2ea3.tar.gz";
+    url = "https://github.com/nixos/nixpkgs/archive/feaf8ac4632c2d9d27f24272da2e6873d2e9a7ad.tar.gz";
     # hash obtained with `nix-prefetch-url --unpack <url from above>`
-    sha256 = "13ndciddbqi5j6b5pajyx476aq5idpk4jsjaiw76y7ygnqj3y239";
+    sha256 = "0qz8qmvh9vb6n1ziflhlww0pqqw936228pcpwnsyl8adi2izc7lw";
   }) {};
 
   unstable-pkgs = import (builtins.fetchTarball {
     # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-18.09-2019-02-23";
+    name = "nixpkgs-18.09-2019-04-16";
     # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-unstable`
-    url = "https://github.com/nixos/nixpkgs/archive/44f78998bbbf7fdf1262442ca9f3f7db11ae2516.tar.gz";
+    url = "https://github.com/nixos/nixpkgs/archive/0c0954781e257b8b0dc49341795a2fe7d96945a3.tar.gz";
     # hash obtained with `nix-prefetch-url --unpack <url from above>`
-    sha256 = "1iflrjf2hcc96q5cw70xjkq8cw98r69yihhgw52bc2s7ryx4f1ky";
+    sha256 = "05fq11wg8mik4zvfjy2gap59r8n0gfbklsw61r45wlqi7a2zsl0y";
   }) {};
 
   hub = pkgs.gitAndTools.hub;
@@ -63,8 +63,8 @@ let
     yarn2nix = pkgs.callPackage (pkgs.fetchFromGitHub {
       owner = "moretea";
       repo = "yarn2nix";
-      rev = "780e33a07fd821e09ab5b05223ddb4ca15ac663f";
-      sha256 = "1f83cr9qgk95g3571ps644rvgfzv2i4i7532q8pg405s4q5ada3h";
+      rev = "3cc020e384ce2a439813adb7a0cc772a034d90bb";
+      sha256 = "0h2kzdfiw43rbiiffpqq9lkhvdv8mgzz2w29pzrxgv8d39x67vr9";
     }) {};
 
     vim = callPackage ./vim {
@@ -84,7 +84,7 @@ let
       emacs
       fzf
       git
-      pijul
+      #pijul
       silver-searcher
       tmux
       vim
