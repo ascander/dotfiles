@@ -84,7 +84,7 @@ let
       emacs
       fzf
       git
-      pijul
+      #pijul
       silver-searcher
       tmux
       vim
