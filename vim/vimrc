@@ -131,6 +131,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
+" show diagnostic under cursor
+nmap <silent> <Enter> <Plug>(coc-diagnostic-info)
+
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
