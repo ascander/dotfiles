@@ -49,7 +49,9 @@ let
     };
 
     # Tmux with a custom tmux.conf baked in
-    tmux = callPackage ./tmux {};
+    tmux = callPackage ./tmux {
+      reattach-to-user-namespace = if (pkgs.stdenv.isDarwin) then pkgs.reattach-to-user-namespace else null;
+    };
 
     emacs = callPackage ./emacs {
       emacsWithPackages = (pkgs.emacsPackagesNgGen pkgs.emacs).emacsWithPackages;
@@ -72,10 +74,6 @@ let
       inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
     };
   };
-
-  darwinOnly = with pkgs; [
-    reattach-to-user-namespace
-  ];
 
   allPlatforms = with custom;
     [
@@ -106,8 +104,7 @@ let
     ];
 
   # The list of packages to be installed
-  tools = with pkgs; with pkgs.lib;
-    allPlatforms ++ optionals stdenv.isDarwin darwinOnly;
+  tools = allPlatforms;
 
 in
   if pkgs.lib.inNixShell
