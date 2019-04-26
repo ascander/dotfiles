@@ -12,7 +12,12 @@ This is my attempt at a [Nix](https://nixos.org/nix/) based dotfiles repository.
 
 Instructions for a new machine are as follows:
 
-1. Download and install the following apps: [Google Chrome](https://www.google.com/chrome/), [Spotify Player](https://www.spotify.com/us/download/other/), [Slack](https://slack.com/download), [Karabiner Elements](https://pqrs.org/osx/karabiner/) (if on a Mac)
+1. Download and install the following apps:
+   - [Google Chrome](https://www.google.com/chrome/)
+   - [Google Drive Backup & Sync](https://www.google.com/drive/download/backup-and-sync/)
+   - [Spotify Player](https://www.spotify.com/us/download/other/)
+   - [Slack](https://slack.com/download)
+   - [Karabiner Elements](https://pqrs.org/osx/karabiner/) (if on a Mac)
 2. Download and install any fonts you might like (_eg._ [Iosevka](https://github.com/be5invis/Iosevka/releases/latest))
 3. Generate SSH keys for Github/Github Enterprise/etc. See [these instructions](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) for how to do this.
 4. If you have multiple keys for personal/work Github accounts, add a config file in `~/.ssh/config` along the following lines:
