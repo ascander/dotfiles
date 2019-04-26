@@ -87,7 +87,8 @@ let
       pkgs.nix
       pkgs.nix-zsh-completions
       pkgs.openjdk
-      pinentry
+      pkgs.pinentry
+      pkgs.ripgrep
       pkgs.tree
       pkgs.zsh-completions
     ];
