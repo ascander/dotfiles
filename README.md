@@ -86,4 +86,3 @@ In Terminal settings, import `~/code/dotfiles/resources/settings.terminal` and m
 Thanks to the following people/repositories for inspiration, etc.
 
 * @ceedubs for the [dotfiles](https://gitlab.com/ceedubs/dotfiles) repository, which is the basis for this one.
-* @jwiegley for the [nix-config](https://github.com/jwiegley/nix-config) repository, which contains an excellent Nix-based config for Emacs
