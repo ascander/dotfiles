@@ -201,6 +201,7 @@ alias g='git'
 
 alias gs='git status'
 alias gst='git status -sb'
+alias gd='git diff'
 
 alias ga='git add'
 alias gaa='git add --all'
@@ -219,6 +220,8 @@ alias gcm='git checkout master'
 alias gl='git pull'
 alias gup='git pull --rebase'
 alias glum='git pull upstream master'
+
+alias grv='git remote -v'
 
 alias gp='git push'
 alias gpd='git push --dry-run'
