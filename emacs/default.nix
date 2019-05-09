@@ -11,6 +11,7 @@ let
     linum-relative
     markdown-mode
     org
+    org-pomodoro
     spaceline
     color-theme-sanityinc-tomorrow
     which-key
