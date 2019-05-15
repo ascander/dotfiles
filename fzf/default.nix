@@ -7,6 +7,6 @@ symlinkJoin {
   paths = [ fzf ];
   postBuild = ''
     wrapProgram "$out/bin/fzf" \
-    --set FZF_DEFAULT_COMMAND 'ag --hidden -g ""'
+    --set FZF_DEFAULT_COMMAND 'rg --files --no-ignore --hidden --follow --glob "!.git/*" 2> /dev/null'
   '';
 }
