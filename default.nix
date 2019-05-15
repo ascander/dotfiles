@@ -6,20 +6,20 @@ let
   # use a pinned version of nixpkgs for reproducability
   pkgs = import (builtins.fetchTarball {
     # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-18.09-2019-04-16";
+    name = "nixpkgs-18.09-2019-05-14";
     # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-18.09-darwin`
-    url = "https://github.com/nixos/nixpkgs/archive/feaf8ac4632c2d9d27f24272da2e6873d2e9a7ad.tar.gz";
+    url = "https://github.com/nixos/nixpkgs/archive/1e9e709953e315ab004951248b186ac8e2306451.tar.gz";
     # hash obtained with `nix-prefetch-url --unpack <url from above>`
-    sha256 = "0qz8qmvh9vb6n1ziflhlww0pqqw936228pcpwnsyl8adi2izc7lw";
+    sha256 = "0vimw4pqiqiz23hnpbcir413n4mbmz8bpq430w7d234mpzws48w7";
   }) {};
 
   unstable-pkgs = import (builtins.fetchTarball {
     # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-18.09-2019-04-16";
+    name = "nixpkgs-unstable-2019-05-14";
     # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-unstable`
-    url = "https://github.com/nixos/nixpkgs/archive/0c0954781e257b8b0dc49341795a2fe7d96945a3.tar.gz";
+    url = "https://github.com/nixos/nixpkgs/archive/9ebc6ad944c9e53f58536ef50c64b6f057e5fa4c.tar.gz";
     # hash obtained with `nix-prefetch-url --unpack <url from above>`
-    sha256 = "05fq11wg8mik4zvfjy2gap59r8n0gfbklsw61r45wlqi7a2zsl0y";
+    sha256 = "1hv53kw8nwg9k3kim19ykbmn3yksgmlw1gjbd6d5midhmjjc6mhv";
   }) {};
 
   hub = pkgs.gitAndTools.hub;
