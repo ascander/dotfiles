@@ -92,7 +92,7 @@ if [ -z "$INSIDE_EMACS" ]; then
   autoload -U promptinit; promptinit
   prompt pure
 else
-  PROMPT="%c❯ " 
+  PROMPT="%c❯ "
 fi
 
 # load completion
@@ -136,7 +136,7 @@ if [[ -x "${NIX_PROFILE}/bin/emacsclient" ]]; then
     #
     # Note: the minimum number of frames required is 2. This is not a mistake. If
     # this is set to 1, Emacs does not successfully connect to the existing frame.
-    # My best guess at explaining this is that running the Emacs daemon consumes a 
+    # My best guess at explaining this is that running the Emacs daemon consumes a
     # frame, and counting actual frames opened is 2-indexed.
     _emacslauncher() {
         if [[ "$(emacsclient --alternate-editor "" --eval '(length (frame-list))' 2>/dev/null)" -ge 2 ]]; then
@@ -233,6 +233,14 @@ if (( $+commands[tree] )); then
   alias tree='tree -A'
 fi
 
+# Shortcut for rehashing nix environment
+nn() {
+    DEFAULT_NIX="${HOME}/code/dotfiles/default.nix"
+    if [[ -f "$DEFAULT_NIX" ]]; then
+        nix-env -f "$DEFAULT_NIX" -i --remove-all && exec $SHELL
+    fi
+}
+
 # Settings for 'ls'
 #
 # TODO use gls
@@ -262,4 +270,3 @@ alias ..='cd ../.'
 alias ...='cd ../../.'
 alias ....='cd ../../../.'
 alias .....='cd ../../../../.'
-
