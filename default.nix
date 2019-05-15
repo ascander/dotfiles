@@ -28,9 +28,6 @@ let
 
     pure-prompt = callPackage ./zsh/pure-prompt.nix {};
 
-    # silver-searcher with environment setup
-    silver-searcher = callPackage ./silver-searcher {};
-
     # Zsh with config baked in
     zsh = callPackage ./zsh {
       site-functions = builtins.map
@@ -69,7 +66,6 @@ let
       fzf
       git
       metals
-      silver-searcher
       tmux
       vim
       zsh
