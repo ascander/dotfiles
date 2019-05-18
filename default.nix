@@ -13,7 +13,17 @@ let
     sha256 = "0fvxn8w368wg8d0lgbmrkr3ws1i1484hjrzsr65y4wldz0w9chrq";
   }) {};
 
+  pkgs-unstable = import (builtins.fetchTarball {
+    # Descriptive name to make the store path easier to identify
+    name = "nixpkgs-master-2019-05-17";
+    url = "https://github.com/nixos/nixpkgs/archive/619492c03ecfc6cde541a680a1ac1e5250584acc.tar.gz";
+    # hash obtained with `nix-prefetch-url --unpack <url from above>`
+    sha256 = "0ylk57v97mvzh37055my8z5marfcq7ircxjlnkqgg55y5xdcqzw1";
+  }) {};
+
   hub = pkgs.gitAndTools.hub;
+
+  lab = pkgs-unstable.gitAndTools.lab;
 
   custom = rec {
     inherit (pkgs) callPackage;
@@ -36,7 +46,7 @@ let
     zsh = callPackage ./zsh {
       site-functions = builtins.map
         (p: "${p}/share/zsh/site-functions")
-        [ ddgr pure-prompt hub pijul pkgs.nix-zsh-completions ];
+        [ ddgr pure-prompt hub lab pijul pkgs.nix-zsh-completions ];
     };
 
     # Tmux with a custom tmux.conf baked in
@@ -87,6 +97,7 @@ let
       pkgs.gawk
       pkgs.gnupg
       hub
+      lab
       pkgs.less
       pkgs.nix
       pkgs.nix-zsh-completions
