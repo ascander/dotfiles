@@ -5,13 +5,13 @@
 { buildVimPluginFrom2Nix, fetchFromGitHub, nodejs, yarn, yarn2nix }:
 let
   pname = "coc.nvim";
-  version = "0.0.67";
+  version = "0.0.72";
 
   src = fetchFromGitHub {
     owner = "neoclide";
     repo = pname;
     rev = "v${version}";
-    sha256 = "0aqsgz76byqdddwk53gvyn20zk5xaw14dp2kjvl0v80801prqi93";
+    sha256 = "1svi2miv410w8j1vq9qmswz74gyz26jxf7kcmvvy3hfw91vcb5x5";
   };
 
   deps = yarn2nix.mkYarnModules rec {
