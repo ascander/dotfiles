@@ -3,22 +3,15 @@
 # Based on https://github.com/nmattia/homies/blob/master/default.nix
 let
 
-  # use a pinned version of nixpkgs for reproducability
-  pkgs = import (builtins.fetchTarball {
-    # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-19.03-2019-05-17";
-    # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-19.03-darwin`
-    url = "https://github.com/nixos/nixpkgs/archive/c86f09d2d939f0f6993447117f841f19242500c2.tar.gz";
-    # hash obtained with `nix-prefetch-url --unpack <url from above>`
-    sha256 = "0fvxn8w368wg8d0lgbmrkr3ws1i1484hjrzsr65y4wldz0w9chrq";
-  }) {};
+  pkgs = pkgs-unstable;
 
   pkgs-unstable = import (builtins.fetchTarball {
     # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-master-2019-05-17";
-    url = "https://github.com/nixos/nixpkgs/archive/619492c03ecfc6cde541a680a1ac1e5250584acc.tar.gz";
+    name = "nixpkgs-master-2019-07-15";
+    # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-unstable`
+    url = "https://github.com/nixos/nixpkgs/archive/31c38894c90429c9554eab1b416e59e3b6e054df.tar.gz";
     # hash obtained with `nix-prefetch-url --unpack <url from above>`
-    sha256 = "0ylk57v97mvzh37055my8z5marfcq7ircxjlnkqgg55y5xdcqzw1";
+    sha256 = "1fv14rj5zslzm14ak4lvwqix94gm18h28376h4hsmrqqpnfqwsdw";
   }) {};
 
   hub = pkgs.gitAndTools.hub;
@@ -33,10 +26,6 @@ let
     # Git with config baked in
     git = callPackage ./git {};
 
-    pijul = callPackage ./pijul {
-      pijul = pkgs.pijul;
-    };
-
     pure-prompt = callPackage ./zsh/pure-prompt.nix {};
 
     # silver-searcher with environment setup
@@ -46,7 +35,7 @@ let
     zsh = callPackage ./zsh {
       site-functions = builtins.map
         (p: "${p}/share/zsh/site-functions")
-        [ ddgr pure-prompt hub lab pijul pkgs.nix-zsh-completions ];
+        [ ddgr pure-prompt hub lab pkgs.nix-zsh-completions ];
     };
 
     # Tmux with a custom tmux.conf baked in
@@ -70,7 +59,7 @@ let
       sha256 = "0h2kzdfiw43rbiiffpqq9lkhvdv8mgzz2w29pzrxgv8d39x67vr9";
     }) {};
 
-    vim = callPackage ./vim {
+    vim = pkgs-unstable.callPackage ./vim {
       inherit metals yarn2nix;
       inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
     };
