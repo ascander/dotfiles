@@ -105,6 +105,9 @@ alias ls='ls -G'
 # run emacs in terminal mode
 alias emacs='emacs -nw'
 
+# delete branches that have been merged to to the current branch
+alias del-merged='git branch --merged HEAD --no-contains HEAD | xargs git branch -d'
+
 # 256 color terminal
 export TERM=xterm-256color
 
