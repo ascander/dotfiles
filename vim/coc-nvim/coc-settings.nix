@@ -6,11 +6,11 @@
   diagnostic.errorSign = "🚽";
 
   languageserver = {
-    scala = {
+    metals = {
       command = metals + "/bin/metals";
       filetypes = [ "scala" "sbt" ];
     };
-    rust = {
+    rls = {
       command = "rls";
       filetypes = [ "rs" ];
     };
