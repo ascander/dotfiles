@@ -8,10 +8,10 @@ let
   version = "1.0.10";
 
   src = fetchFromGitHub {
-    owner = "ceedubs";
+    owner = "neoclide";
     repo = pname;
-    rev = "35db2b5c7e901918ef2b87fc10851f4d27db1366";
-    sha256 = "1nmyvmlknhh67h1vjm5i9p285khdh77hzlam34r0qqm172qpyw8b";
+    rev = "0c005a817016412e6fba56ab81d20a949c42fbd1";
+    sha256 = "0h5a1a9s9rarafmfy2i77rrsmg9393hdk53v3hfzs0f00q9qk7wn";
   };
 
   deps = yarn2nix.mkYarnModules rec {
