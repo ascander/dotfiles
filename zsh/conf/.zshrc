@@ -147,8 +147,8 @@ if [[ -x "${NIX_PROFILE}/bin/emacsclient" ]]; then
     }
 
     # Set up environment with smrt Emacs
-    export EDITOR='_emacslauncher --no-wait'
-    export VISUAL='_emacslauncher --no-wait'
+    export EDITOR='emacsclient'
+    export VISUAL='emacsclient'
 
     # Some aliases
     alias emacs='_emacslauncher --no-wait'
