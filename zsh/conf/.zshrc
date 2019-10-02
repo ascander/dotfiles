@@ -77,6 +77,8 @@ if [ -e "${NIX_PROFILE}/etc/profile.d/nix.sh" ]; then
   # Set some aliases
   alias ns='nix-shell'
   alias ne='nix-env'
+  alias nefind='ne -qaP'
+  alias nedesc='ne -qa --description'
 fi
 
 setopt shwordsplit
@@ -202,6 +204,7 @@ alias g='git'
 alias gs='git status'
 alias gst='git status -sb'
 alias gd='git diff'
+alias gl='git l' # uses git configured log
 
 alias ga='git add'
 alias gaa='git add --all'
@@ -217,7 +220,7 @@ alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gcm='git checkout master'
 
-alias gl='git pull'
+alias gpl='git pull'
 alias gup='git pull --rebase'
 alias glum='git pull upstream master'
 
