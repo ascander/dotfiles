@@ -7,11 +7,11 @@ let
 
   pkgs-unstable = import (builtins.fetchTarball {
     # Descriptive name to make the store path easier to identify
-    name = "nixpkgs-master-2019-07-15";
+    name = "nixpkgs-19.09-darwin";
     # rev obtained with `git ls-remote https://github.com/nixos/nixpkgs-channels nixpkgs-unstable`
-    url = "https://github.com/nixos/nixpkgs/archive/31c38894c90429c9554eab1b416e59e3b6e054df.tar.gz";
+    url = "https://github.com/nixos/nixpkgs/archive/bb7c495f2e74bf49c32b14051c74b3847e1e2be0.tar.gz";
     # hash obtained with `nix-prefetch-url --unpack <url from above>`
-    sha256 = "1fv14rj5zslzm14ak4lvwqix94gm18h28376h4hsmrqqpnfqwsdw";
+    sha256 = "0dm57i9cpyi55h519vc6bc9dlcmxr3aa4pf9pkff6lnkrywi30nm";
   }) {};
 
   hub = pkgs.gitAndTools.hub;
