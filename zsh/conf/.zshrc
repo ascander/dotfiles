@@ -173,9 +173,9 @@ fi
 export SBT_OPTS="-Dscala.color -Dmetals.http=true"
 
 # Scalameta Metals setup
-if (( $+commands[metals] )); then
-  export METALS_ENABLED="true"
-fi
+# if (( $+commands[metals] )); then
+#   export METALS_ENABLED="true"
+# fi
 
 # Scala development aliases
 alias kt='find . -name "target" -type d -print0 | xargs -0 rm -rf'
