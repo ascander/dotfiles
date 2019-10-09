@@ -10,7 +10,7 @@
 #
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
+    export BROWSER='open'
 fi
 
 #
@@ -26,7 +26,7 @@ export PAGER='less'
 #
 
 if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
+    export LANG='en_US.UTF-8'
 fi
 
 #
@@ -47,7 +47,7 @@ export LESS='-F -g -i -M -R -S -w -X -z-4'
 
 # Set the Less input preprocessor.
 if (( $+commands[lesspipe.sh] )); then
-  export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
+    export LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
 fi
 
 #
@@ -55,13 +55,13 @@ fi
 #
 
 if [[ ! -d "$TMPDIR" ]]; then
-  export TMPDIR="/tmp/$USER"
-  mkdir -p -m 700 "$TMPDIR"
+    export TMPDIR="/tmp/$USER"
+    mkdir -p -m 700 "$TMPDIR"
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
 if [[ ! -d "$TMPPREFIX" ]]; then
-  mkdir -p "$TMPPREFIX"
+    mkdir -p "$TMPPREFIX"
 fi
 
 #
@@ -72,29 +72,29 @@ export NIX_PROFILE="${HOME}/.nix-profile"
 
 # Initialize Nix if needed
 if [ -e "${NIX_PROFILE}/etc/profile.d/nix.sh" ]; then
-  . "${NIX_PROFILE}/etc/profile.d/nix.sh";
+    . "${NIX_PROFILE}/etc/profile.d/nix.sh";
 
-  # Set some aliases
-  alias ns='nix-shell'
-  alias ne='nix-env'
-  alias nefind='ne -qaP'
-  alias nedesc='ne -qa --description'
+    # Set some aliases
+    alias ns='nix-shell'
+    alias ne='nix-env'
+    alias nefind='ne -qaP'
+    alias nedesc='ne -qa --description'
 fi
 
 setopt shwordsplit
 
 fpath=(
-  # zsh completion and themes
-  "$ZDOTDIR/site-functions"
-  $fpath
+    # zsh completion and themes
+    "$ZDOTDIR/site-functions"
+    $fpath
 )
 
 # prompt theme; unless inside Emacs
 if [ -z "$INSIDE_EMACS" ]; then
-  autoload -U promptinit; promptinit
-  prompt pure
+    autoload -U promptinit; promptinit
+    prompt pure
 else
-  PROMPT="%c❯ "
+    PROMPT="%c❯ "
 fi
 
 # load completion
@@ -106,7 +106,7 @@ autoload -Uz compinit && compinit
 
 # Source local zshrc.
 if [[ -s "$HOME/.zshrc.local" ]]; then
-  source "$HOME/.zshrc.local"
+    source "$HOME/.zshrc.local"
 fi
 
 # 256 color terminal
@@ -115,8 +115,8 @@ export TERM=xterm-256color
 export GPG_TTY=$(tty)
 
 path=(
-  $path
-  /bin
+    $path
+    /bin
 )
 
 export LANG=en_us.utf-8
@@ -188,14 +188,31 @@ export JAVA_OPTS='-Dfile.encoding=utf8'
 # Using '--quiet' with 'symbolic-ref' will not cause a fatal error (128) if
 # it's not a symbolic ref, but in a Git repo.
 git_current_branch() {
-  local ref
-  ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
-  local ret=$?
-  if [[ $ret != 0 ]]; then
-    [[ $ret == 128 ]] && return  # no git repo.
-    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
-  fi
-  echo ${ref#refs/heads/}
+    local ref
+    ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
+    local ret=$?
+    if [[ $ret != 0 ]]; then
+        [[ $ret == 128 ]] && return  # no git repo.
+        ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+    fi
+    echo ${ref#refs/heads/}
+}
+
+# Function to run Miniconda initialization for Python development
+#
+# This adds to load time, and to Emacs init time, so there's no reason to have
+# it run for every shell, since it's not often that you're in Westworld.
+ww() {
+    if [[ -d "${HOME}/miniconda3" ]]; then
+        __conda_setup="$("${HOME}/miniconda3/bin/conda" shell.bash hook 2> /dev/null)"
+        eval "$__conda_setup"
+        unset __conda_setup
+        # Used by 'pyvenv' package in Emacs to determine where environments live
+        export WORKON_HOME="${HOME}/miniconda3/envs"
+    else
+        echo "Could not find conda installation at: $("${HOME}/miniconda3")"
+        exit 1
+    fi
 }
 
 # Git aliases
@@ -233,7 +250,7 @@ alias gpsup='git push --set-upstream origin $(git_current_branch)'
 
 # ANSI hack for tree
 if (( $+commands[tree] )); then
-  alias tree='tree -A'
+    alias tree='tree -A'
 fi
 
 # Shortcut for rehashing nix environment
