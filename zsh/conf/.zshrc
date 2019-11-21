@@ -267,7 +267,7 @@ nn() {
 export CLICOLOR=1
 export LSCOLORS="exfxcxdxbxegedabagacad"
 
-alias ls='ls -Gh'
+alias ls='/bin/ls -Gh' # pin to macOS 'ls' on account of unprefixed GNU 'ls'
 alias lk='ls -lSr'
 alias lt='ls -ltf'
 alias lc='ls -lctr'
