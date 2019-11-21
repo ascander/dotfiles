@@ -16,12 +16,12 @@ let
 
   hub = pkgs.gitAndTools.hub;
 
-  lab = pkgs-darwin.gitAndTools.lab;
+  # lab = pkgs-darwin.gitAndTools.lab;
 
   custom = rec {
     inherit (pkgs) callPackage;
 
-    ddgr = pkgs.ddgr;
+    # ddgr = pkgs.ddgr;
 
     # Git with config baked in
     git = callPackage ./git {};
@@ -32,7 +32,7 @@ let
     zsh = callPackage ./zsh {
       site-functions = builtins.map
         (p: "${p}/share/zsh/site-functions")
-        [ ddgr pure-prompt hub pkgs.nix-zsh-completions ];
+        [ pure-prompt hub pkgs.nix-zsh-completions ];
     };
 
     # Tmux with a custom tmux.conf baked in
@@ -51,52 +51,36 @@ let
       sha256 = "0h2kzdfiw43rbiiffpqq9lkhvdv8mgzz2w29pzrxgv8d39x67vr9";
     }) {};
 
-    emacsHead = pkgs.emacs.overrideAttrs (oldAttrs: rec {
-      name = "emacs-${version}";
-      version = "27.0";
-      srcRepo = true;
-      src = pkgs.fetchFromGitHub {
-        owner = "emacs-mirror";
-        repo = "emacs";
-        rev = "a76a1d0c0b5c63bbed4eeeb7aa87269621956559";
-        sha256 = "0cx7ahk18amqlivmpxvq9d3a9axbj5ag6disssxkbn8y7bib0s0i";
-      };
-      patches = [];
-    });
-
     vim = pkgs-darwin.callPackage ./vim {
       inherit metals yarn2nix;
       inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
     };
   };
 
-  pinentry = if (pkgs.stdenv.isDarwin) then pkgs.pinentry_mac else pkgs.pinentry;
+  # pinentry = if (pkgs.stdenv.isDarwin) then pkgs.pinentry_mac else pkgs.pinentry;
 
   allPlatforms = with custom;
     [
       # Customized packages
-      ddgr
       fzf
       git
+      hub
       metals
       tmux
       vim
       zsh
 
+      # Vernilla packages
       pkgs.bash
       pkgs.cacert
-      pkgs.coreutils-prefixed
+      pkgs.coreutils
       pkgs.emacs
       pkgs.fasd
       pkgs.gawk
-      pkgs.gnupg
-      hub
-      lab
       pkgs.less
       pkgs.nix
       pkgs.nix-zsh-completions
       pkgs.openjdk
-      pkgs.pinentry
       pkgs.ripgrep
       pkgs.tree
       pkgs.zsh-completions
