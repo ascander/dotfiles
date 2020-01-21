@@ -26,6 +26,50 @@ alias la="ls ${lsflags} -lhA"   # show all files (except . and ..)
 alias lt="ls ${lsflags} -lhtr"  # show by date modified (oldest first)
 alias l="ll"                    # pacify the monster
 
+# Safety first…
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+
+# Misc
+alias mkdir='mkdir -p'
+alias du='du -h'
+alias ..='cd ../.'
+alias ...='cd ../../.'
+alias ....='cd ../../../.'
+alias .....='cd ../../../../.'
+
+# Git settings
+if (( $+commands[hub] )); then
+    eval "$(hub alias -s)"
+fi
+
+# Aliases
+alias gs='git status -sb'
+alias gl='git l'
+alias gd='git diff'
+
+alias gco='git checkout'
+alias gcb='git checkout -b'
+
+alias gup='git pull --rebase'
+alias grv='git remote -v'
+
+# Fasd settings
+if (( $+commands[fasd] )); then
+    eval "$(fasd --init auto)"
+
+    # Default aliases, included here for documentation
+    # alias a='fasd -a'        # any
+    # alias s='fasd -si'       # show / search / select
+    # alias d='fasd -d'        # directory
+    # alias f='fasd -f'        # file
+    # alias sd='fasd -sid'     # interactive directory selection
+    # alias sf='fasd -sif'     # interactive file selection
+    # alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+    # alias zz='fasd_cd -d -i' # cd with interactive selection
+fi
+
 # More suitable for .zshenv
 EDITOR=emacs
 
