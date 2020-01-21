@@ -22,9 +22,6 @@ let
     # Git with config baked in
     git = callPackage ./git {};
 
-    # # ZSH prompt of choice
-    # pure-prompt = callPackage ./zsh/pure-prompt.nix {};
-
     # # ZSH with config baked in
     # zsh = callPackage ./zsh {
     #   site-functions = builtins.map
@@ -32,7 +29,9 @@ let
     #     [ pure-prompt hub pkgs.nix-zsh-completions ];
     # };
 
-    zshrc = callPackage ./zshrc {};
+    geometry-zsh = callPackage ./zshrc/geometry-zsh.nix {};
+
+    zshrc = callPackage ./zshrc { geometry-zsh = geometry-zsh; };
 
     # Tmux with a custom tmux.conf baked in
     tmux = callPackage ./tmux {
@@ -69,6 +68,7 @@ let
       metals
       tmux
       vim
+      geometry-zsh
       zshrc
 
       # Vernilla packages
