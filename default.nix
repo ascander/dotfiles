@@ -29,9 +29,9 @@ let
     #     [ pure-prompt hub pkgs.nix-zsh-completions ];
     # };
 
-    geometry-zsh = callPackage ./zshrc/geometry-zsh.nix {};
-
     zshrc = callPackage ./zshrc { geometry-zsh = geometry-zsh; };
+
+    geometry-zsh = callPackage ./zshrc/geometry-zsh.nix {};
 
     # Tmux with a custom tmux.conf baked in
     tmux = callPackage ./tmux {
@@ -68,8 +68,8 @@ let
       metals
       tmux
       vim
-      geometry-zsh
       zshrc
+      geometry-zsh
 
       # Vernilla packages
       pkgs.bash
