@@ -1,5 +1,5 @@
 # History settings
-HISTFILE="${HOME}/.zsh_history"
+HISTFILE="${HOME}/.zhistory"
 HISTSIZE=10000
 SAVEHIST=10000
 setopt append_history              # allow multiple sessions to append to one history
@@ -22,12 +22,15 @@ setopt autocd                      # cd to a folder just by typing it's name
 ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;&' # These "eat" the auto prior space after a tab complete
 
 # Misc
+setopt NO_BEEP                     # no beeping
+setopt NO_LIST_BEEP                # no beeping for ambiguous completion
+setopt NO_HIST_BEEP                # not for history errors either
 setopt interactive_comments        # allow # comments in shell; good for copy/paste
 unsetopt correct_all               # I don't care for 'suggestions' from ZSH
 export BLOCK_SIZE="'1"             # Add commas to file sizes
 
 # Path
-typeset -gU path                   # keep duplicates out of the path
+typeset -gU cdpath fpath mailpath path # keep duplicates out of the path arrays
 
 # Bindkey
 bindkey -e
@@ -35,6 +38,17 @@ bindkey '\e[3~' delete-char
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey ' '  magic-space
+
+# Less settings
+LESS='-F -g -i -M -R -S -w -X -z-4'
+
+# Set the input preprocessor, eg. for colors
+if (( $+commands[lesspipe.sh] )); then
+    LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
+fi
+
+# Source local zshrc if present
+test -s "$HOME/.zshrc.local" && source "$HOME/.zshrc.local"
 
 # Git settings
 if (( $+commands[hub] )); then
