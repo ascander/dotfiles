@@ -77,8 +77,13 @@ if [ -e "${NIX_PROFILE}/etc/profile.d/nix.sh" ]; then
     # Set some aliases
     alias ns='nix-shell'
     alias ne='nix-env'
-    alias nefind='ne -qaP'
-    alias nedesc='ne -qa --description'
+
+    # Looking for packages
+    alias nixfind='nix-env -qaP'
+    alias nixinfo='nix-env -qa --description'
+
+    # Rolling back/reverting
+    alias nixopps='nix-env --rollback'
 fi
 
 setopt shwordsplit
@@ -126,7 +131,6 @@ export LC_TYPE=en_us.utf-8
 HISTFILE=$HOME/.zhistory
 
 source "$ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
 
 # Set up Emacs if we're using a Nix-installed version
 if [[ -x "${NIX_PROFILE}/bin/emacsclient" ]]; then
