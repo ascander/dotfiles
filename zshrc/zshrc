@@ -98,6 +98,14 @@ if (( $+commands[emacsclient] )); then
     alias ke="_emacslauncher --eval '(kill-emacs)'"
 fi
 
+# Nix aliases
+alias ns='nix-shell'
+alias ne='nix-env'
+
+alias nixfind='nix-env -qaP'
+alias nixinfo='nix-env -qa --description'
+alias nixopps='nix-env --rollback'
+
 # GNU and BSD (macOS) ls use different flags
 if $(ls --version &>/dev/null); then
     lsflags="--color=auto --group-directories-first"
