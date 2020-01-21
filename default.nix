@@ -16,19 +16,16 @@ let
 
   hub = pkgs.gitAndTools.hub;
 
-  # lab = pkgs-darwin.gitAndTools.lab;
-
   custom = rec {
     inherit (pkgs) callPackage;
-
-    # ddgr = pkgs.ddgr;
 
     # Git with config baked in
     git = callPackage ./git {};
 
+    # ZSH prompt of choice
     pure-prompt = callPackage ./zsh/pure-prompt.nix {};
 
-    # Zsh with config baked in
+    # ZSH with config baked in
     zsh = callPackage ./zsh {
       site-functions = builtins.map
         (p: "${p}/share/zsh/site-functions")
@@ -40,10 +37,13 @@ let
       reattach-to-user-namespace = if (pkgs.stdenv.isDarwin) then pkgs.reattach-to-user-namespace else null;
     };
 
+    # Scala language server
     metals = pkgs.callPackage ./metals {};
 
+    # Command line fuzzy finder
     fzf = pkgs.callPackage ./fzf {};
 
+    # Convert 'yarn.lock' files into Nix expressions
     yarn2nix = pkgs.callPackage (pkgs.fetchFromGitHub {
       owner = "moretea";
       repo = "yarn2nix";
@@ -51,13 +51,12 @@ let
       sha256 = "0h2kzdfiw43rbiiffpqq9lkhvdv8mgzz2w29pzrxgv8d39x67vr9";
     }) {};
 
+    # The *other* editor
     vim = pkgs-darwin.callPackage ./vim {
       inherit metals yarn2nix;
       inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
     };
   };
-
-  # pinentry = if (pkgs.stdenv.isDarwin) then pkgs.pinentry_mac else pkgs.pinentry;
 
   allPlatforms = with custom;
     [
@@ -80,6 +79,7 @@ let
       pkgs.less
       pkgs.nix
       pkgs.nix-zsh-completions
+      pkgs.nodejs               # TODO migrate globally installed node packages to Nix
       pkgs.openjdk
       pkgs.ripgrep
       pkgs.tree
