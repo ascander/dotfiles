@@ -1,0 +1,2 @@
+# History settings
+export HISTSIZE=10000
