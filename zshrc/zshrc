@@ -39,6 +39,12 @@ bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey ' '  magic-space
 
+# Prompt settings
+GEOMETRY_STATUS_SYMBOL="▲ "            # adjust default symbols with a bit of whitespace
+GEOMETRY_STATUS_SYMBOL_ERROR="△ "      #
+GEOMETRY_STATUS_SYMBOL_ROOT="▼ "       #
+GEOMETRY_STATUS_SYMBOL_ROOT_ERROR="▽ " #
+
 # Less settings
 LESS='-F -g -i -M -R -S -w -X -z-4'
 
