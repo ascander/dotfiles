@@ -5,14 +5,13 @@
 # The zshrc script should be evaluated from the actual ~/.zshrc as follows:
 #
 #   if [ -x "$(command -v zshrc)" ]; then $(zshrc); fi
-{ lib, writeText, writeScriptBin, geometry-zsh, cacert }:
+{ lib, writeText, writeScriptBin, cacert }:
 let
   zshrc = writeText "zshrc"
     (lib.concatStringsSep "\n"
     [ (builtins.readFile ./zshrc)
       ''
       export SSL_CERT_FILE=${cacert}/etc/ssl/certs/ca-bundle.crt
-      source ${geometry-zsh}/geometry.zsh
       ''
     ]
     );

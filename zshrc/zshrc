@@ -46,8 +46,13 @@ bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey ' '  magic-space
 
+# Load prompt
+if [ -d "$HOME/.nix-profile/share/zsh/geometry/" ]; then
+    source "$HOME/.nix-profile/share/zsh/geometry/geometry.zsh"
+fi
+
 # Prompt settings
-GEOMETRY_STATUS_SYMBOL="▲ "            # adjust default symbols with a bit of whitespace
+GEOMETRY_STATUS_SYMBOL="▲ "            # adjust default symbols with a nonbreaking space
 GEOMETRY_STATUS_SYMBOL_ERROR="△ "      #
 GEOMETRY_STATUS_SYMBOL_ROOT="▼ "       #
 GEOMETRY_STATUS_SYMBOL_ROOT_ERROR="▽ " #

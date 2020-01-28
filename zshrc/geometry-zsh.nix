@@ -10,8 +10,8 @@ stdenv.mkDerivation rec {
   };
 
   installPhase = ''
-    mkdir -p "$out"
-    cp "geometry.zsh" "$out/geometry.zsh"
-    cp -r "functions" "$out"
+    mkdir -p "$out/share/zsh/geometry"
+    cp "geometry.zsh" "$out/share/zsh/geometry/geometry.zsh"
+    cp "functions" "$out/share/zsh/geometry/functions" -R
   '';
 }

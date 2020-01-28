@@ -20,7 +20,7 @@ let
     inherit (pkgs) callPackage;
 
     git = callPackage ./git {};
-    zshrc = callPackage ./zshrc { geometry-zsh = geometry-zsh; };
+    zshrc = callPackage ./zshrc {};
     geometry-zsh = callPackage ./zshrc/geometry-zsh.nix {};
     metals = pkgs.callPackage ./metals {};
     fzf = pkgs.callPackage ./fzf {};
