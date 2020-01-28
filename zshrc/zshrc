@@ -114,8 +114,8 @@ if (( $+commands[emacsclient] )); then
         fi
     }
 
-    EDITOR='emacsclient'
-    VISUAL='emacsclient'
+    export EDITOR='emacsclient'
+    export VISUAL='emacsclient'
 
     alias emacs='_emacslauncher --no-wait'
     alias e=emacs
