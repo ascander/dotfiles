@@ -141,9 +141,6 @@ alias nixopps='nix-env --rollback'
 # GNU and BSD (macOS) ls use different flags
 if $(ls --version &>/dev/null); then
     lsflags="--color=auto --group-directories-first"
-    if [ -d "$HOME/.nix-profile/share/zsh/dircolors-solarized" ]; then
-        ln -s "$HOME/.nix-profile/share/zsh/dircolors-solarized/dircolors.256dark" "$HOME/.dircolors"
-    fi
 else
     lsflags="-G"
     export CLICOLOR=1
@@ -157,9 +154,13 @@ alias lt="ls ${lsflags} -lhtr"  # show by date modified (oldest first)
 alias l="ll"                    # pacify the monster
 
 # Use Solarized palette for commands that support dircolors
-# TODO nix install 'dircolors-solarized'
 if (( $+commands[dircolors] )); then
-    test -r "$HOME/.dircolors" && eval "$(dircolors $HOME/.dircolors)" || eval "$(dircolors -b)"
+
+    if [ -d "$HOME/.nix-profile/share/zsh/dircolors-solarized/" ]; then
+        test -L "$HOME/.dircolors" || \
+            ln -s "$HOME/.nix-profile/share/zsh/dircolors-solarized/dircolors.256dark" \
+                  "$HOME/.dircolors"
+    fi
 
     # Colorify other things
     alias dir='dir --color=auto'
