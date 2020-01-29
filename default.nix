@@ -60,6 +60,7 @@ let
       pkgs.emacs
       pkgs.fasd
       pkgs.gawk
+      pkgs.jq
       pkgs.less
       pkgs.nix
       pkgs.nix-zsh-completions
