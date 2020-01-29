@@ -141,6 +141,9 @@ alias nixopps='nix-env --rollback'
 # GNU and BSD (macOS) ls use different flags
 if $(ls --version &>/dev/null); then
     lsflags="--color=auto --group-directories-first"
+    if [ -d "$HOME/.nix-profile/share/zsh/dircolors-solarized" ]; then
+        ln -s "$HOME/.nix-profile/share/zsh/dircolors-solarized/dircolors.256dark" "$HOME/.dircolors"
+    fi
 else
     lsflags="-G"
     export CLICOLOR=1

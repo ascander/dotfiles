@@ -22,6 +22,7 @@ let
     git = callPackage ./git {};
     zshrc = callPackage ./zshrc {};
     geometry-zsh = callPackage ./zshrc/geometry-zsh.nix {};
+    dircolors-solarized = callPackage ./zshrc/dircolors-solarized.nix {};
     metals = pkgs.callPackage ./metals {};
     fzf = pkgs.callPackage ./fzf {};
 
@@ -50,6 +51,7 @@ let
       vim
       zshrc
       geometry-zsh
+      dircolors-solarized
 
       # Vernilla packages
       pkgs.bash
