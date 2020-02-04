@@ -75,7 +75,8 @@ fi
 
 # Aliases
 alias gs='git status -sb'
-alias gl='git l'
+alias gl='git log'
+alias gll='git loglines'
 alias gd='git diff'
 
 alias gco='git checkout'
@@ -153,14 +154,14 @@ alias la="ls ${lsflags} -lhA"   # show all files (except . and ..)
 alias lt="ls ${lsflags} -lhtr"  # show by date modified (oldest first)
 alias l="ll"                    # pacify the monster
 
-# Use Solarized palette for commands that support dircolors
-if (( $+commands[dircolors] )); then
+# Link nix-installed dircolors theme if needed
+if [ -d "$HOME/.nix-profile/share/zsh/dircolors-solarized" ]; then
+    test -L "$HOME/.dircolors" || ln -s "$HOME/.nix-profile/share/zsh/dircolors-solarized/dircolors.256dark" "$HOME/.dircolors"
+fi
 
-    if [ -d "$HOME/.nix-profile/share/zsh/dircolors-solarized/" ]; then
-        test -L "$HOME/.dircolors" || \
-            ln -s "$HOME/.nix-profile/share/zsh/dircolors-solarized/dircolors.256dark" \
-                  "$HOME/.dircolors"
-    fi
+# Colorize some programs if ~/.dircolors exists
+if (( $+commands[dircolors] )); then
+    test -r $HOME/.dircolors && eval "$(dircolors $HOME/.dircolors)"
 
     # Colorify other things
     alias dir='dir --color=auto'
