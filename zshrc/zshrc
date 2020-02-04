@@ -1,0 +1,185 @@
+# History settings
+HISTFILE="${HOME}/.zhistory"
+HISTSIZE=10000
+SAVEHIST=10000
+setopt append_history              # allow multiple sessions to append to one history
+setopt bang_hist                   # treat ! special during command expansion
+setopt extended_history            # Write history in :start:elasped;command format
+setopt hist_expire_dups_first      # expire duplicates first when trimming history
+setopt hist_find_no_dups           # When searching history, don't repeat
+setopt hist_ignore_dups            # ignore duplicate entries of previous events
+setopt hist_ignore_space           # prefix command with a space to skip it's recording
+setopt hist_reduce_blanks          # Remove extra blanks from each command added to history
+setopt hist_verify                 # Don't execute immediately upon history expansion
+setopt inc_append_history          # Write to history file immediately, not when shell quits
+setopt share_history               # Share history among all sessions
+
+# Tab completion
+setopt complete_in_word            # cd /ho/sco/tm<TAB> expands to /home/scott/tmp
+setopt auto_menu                   # show completion menu on succesive tab presses
+setopt autocd                      # cd to a folder just by typing it's name
+ZLE_REMOVE_SUFFIX_CHARS=$' \t\n;&' # These "eat" the auto prior space after a tab complete
+
+# Misc
+setopt NO_BEEP                     # no beeping
+setopt NO_LIST_BEEP                # no beeping for ambiguous completion
+setopt NO_HIST_BEEP                # not for history errors either
+setopt interactive_comments        # allow # comments in shell; good for copy/paste
+unsetopt correct_all               # I don't care for 'suggestions' from ZSH
+export BLOCK_SIZE="'1"             # Add commas to file sizes
+
+# Path
+typeset -gU cdpath fpath mailpath path # keep duplicates out of the path arrays
+
+# Completions for nix-installed packages
+if [ -d "$HOME/.nix-profile/share/zsh/site-functions/" ]; then
+    fpath=("$HOME/.nix-profile/share/zsh/site-functions/" $fpath)
+fi
+
+# Load completions
+autoload -Uz compinit && compinit
+
+# Bindkey
+bindkey -e
+bindkey '\e[3~' delete-char
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey ' '  magic-space
+
+# Load prompt
+if [ -d "$HOME/.nix-profile/share/zsh/geometry/" ]; then
+    source "$HOME/.nix-profile/share/zsh/geometry/geometry.zsh"
+fi
+
+# Prompt settings
+GEOMETRY_STATUS_SYMBOL="▲ "            # adjust default symbols with a nonbreaking space
+GEOMETRY_STATUS_SYMBOL_ERROR="△ "      #
+GEOMETRY_STATUS_SYMBOL_ROOT="▼ "       #
+GEOMETRY_STATUS_SYMBOL_ROOT_ERROR="▽ " #
+
+# Less settings
+LESS='-F -g -i -M -R -S -w -X -z-4'
+
+# Set the input preprocessor, eg. for colors
+if (( $+commands[lesspipe.sh] )); then
+    LESSOPEN='| /usr/bin/env lesspipe.sh %s 2>&-'
+fi
+
+# Source local zshrc if present
+test -s "$HOME/.zshrc.local" && source "$HOME/.zshrc.local"
+
+# Git settings
+if (( $+commands[hub] )); then
+    eval "$(hub alias -s)"
+fi
+
+# Aliases
+alias gs='git status -sb'
+alias gl='git log'
+alias gll='git loglines'
+alias gd='git diff'
+
+alias gco='git checkout'
+alias gcb='git checkout -b'
+
+alias gup='git pull --rebase'
+alias grv='git remote -v'
+
+# Fasd settings
+if (( $+commands[fasd] )); then
+    eval "$(fasd --init auto)"
+
+    # Default aliases, included here for documentation
+    # alias a='fasd -a'        # any
+    # alias s='fasd -si'       # show / search / select
+    # alias d='fasd -d'        # directory
+    # alias f='fasd -f'        # file
+    # alias sd='fasd -sid'     # interactive directory selection
+    # alias sf='fasd -sif'     # interactive file selection
+    # alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+    # alias zz='fasd_cd -d -i' # cd with interactive selection
+fi
+
+# Emacs settings
+if (( $+commands[emacsclient] )); then
+    # Launches Emacs in an SMRT way
+    #
+    # First, check to see if there are any existing Emacs frames. If so, connect
+    # to the existing one. If not, create one. By going through `emacsclient` we
+    # also start the Emacs server if it isn't running.
+    #
+    # Note: the minimum number of frames required is 2. This is not a mistake. If
+    # this is set to 1, Emacs does not successfully connect to the existing frame.
+    # My best guess at explaining this is that running the Emacs daemon consumes a
+    # frame, and counting actual frames opened is 2-indexed.
+    _emacslauncher() {
+        if [[ "$(emacsclient --alternate-editor "" --eval '(length (frame-list))' 2>/dev/null)" -ge 2 ]]; then
+            emacsclient --alternate-editor "" "$@"
+        else
+            emacsclient --alternate-editor "" --create-frame "$@"
+        fi
+    }
+
+    export EDITOR='emacsclient'
+    export VISUAL='emacsclient'
+
+    alias emacs='_emacslauncher --no-wait'
+    alias e=emacs
+    alias temacs='_emacslauncher --no-wait -nw'
+    alias te=temacs
+    alias eeval='_emacslauncher --eval'
+    alias ke="_emacslauncher --eval '(kill-emacs)'"
+fi
+
+# Nix aliases
+alias ns='nix-shell'
+alias ne='nix-env'
+
+alias nixfind='nix-env -qaP'
+alias nixinfo='nix-env -qa --description'
+alias nixopps='nix-env --rollback'
+
+# GNU and BSD (macOS) ls use different flags
+if $(ls --version &>/dev/null); then
+    lsflags="--color=auto --group-directories-first"
+else
+    lsflags="-G"
+    export CLICOLOR=1
+fi
+
+# Aliases
+alias ls="ls ${lsflags}"        # use color
+alias ll="ls ${lsflags} -lh"    # show human readable sizes
+alias la="ls ${lsflags} -lhA"   # show all files (except . and ..)
+alias lt="ls ${lsflags} -lhtr"  # show by date modified (oldest first)
+alias l="ll"                    # pacify the monster
+
+# Link nix-installed dircolors theme if needed
+if [ -d "$HOME/.nix-profile/share/zsh/dircolors-solarized" ]; then
+    test -L "$HOME/.dircolors" || ln -s "$HOME/.nix-profile/share/zsh/dircolors-solarized/dircolors.256dark" "$HOME/.dircolors"
+fi
+
+# Colorize some programs if ~/.dircolors exists
+if (( $+commands[dircolors] )); then
+    test -r $HOME/.dircolors && eval "$(dircolors $HOME/.dircolors)"
+
+    # Colorify other things
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Safety first…
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+
+# Misc
+alias mkdir='mkdir -p'
+alias du='du -h'
+alias ..='cd ../.'
+alias ...='cd ../../.'
+alias ....='cd ../../../.'
+alias .....='cd ../../../../.'

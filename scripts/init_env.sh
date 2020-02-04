@@ -1,5 +1,5 @@
 # don't make annoying sounds when emptying trash or taking a screenshot
-defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
+defaults write -g com.apple.sound.uiaudio.enabled -int 0
 
 # don't litter the desktop with screenshots
 SCREENSHOTS_DIR="${HOME}/Pictures/Screenshots"

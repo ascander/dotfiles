@@ -19,28 +19,11 @@ let
   custom = rec {
     inherit (pkgs) callPackage;
 
-    # Git with config baked in
     git = callPackage ./git {};
-
-    # ZSH prompt of choice
-    pure-prompt = callPackage ./zsh/pure-prompt.nix {};
-
-    # ZSH with config baked in
-    zsh = callPackage ./zsh {
-      site-functions = builtins.map
-        (p: "${p}/share/zsh/site-functions")
-        [ pure-prompt hub pkgs.nix-zsh-completions ];
-    };
-
-    # Tmux with a custom tmux.conf baked in
-    tmux = callPackage ./tmux {
-      reattach-to-user-namespace = if (pkgs.stdenv.isDarwin) then pkgs.reattach-to-user-namespace else null;
-    };
-
-    # Scala language server
+    zshrc = callPackage ./zshrc {};
+    geometry-zsh = callPackage ./zshrc/geometry-zsh.nix {};
+    dircolors-solarized = callPackage ./zshrc/dircolors-solarized.nix {};
     metals = pkgs.callPackage ./metals {};
-
-    # Command line fuzzy finder
     fzf = pkgs.callPackage ./fzf {};
 
     # Convert 'yarn.lock' files into Nix expressions
@@ -65,9 +48,10 @@ let
       git
       hub
       metals
-      tmux
       vim
-      zsh
+      zshrc
+      geometry-zsh
+      dircolors-solarized
 
       # Vernilla packages
       pkgs.bash
@@ -76,6 +60,7 @@ let
       pkgs.emacs
       pkgs.fasd
       pkgs.gawk
+      pkgs.jq
       pkgs.less
       pkgs.nix
       pkgs.nix-zsh-completions
