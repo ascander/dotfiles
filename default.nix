@@ -12,7 +12,14 @@ let
     url = "https://github.com/nixos/nixpkgs/archive/bb7c495f2e74bf49c32b14051c74b3847e1e2be0.tar.gz";
     # hash obtained with `nix-prefetch-url --unpack <url from above>`
     sha256 = "0dm57i9cpyi55h519vc6bc9dlcmxr3aa4pf9pkff6lnkrywi30nm";
-  }) {};
+  }) { overlays = [emacs-overlay]; };
+
+  # Use the "official" emacs overlay to get current builds
+  emacs-overlay = import (builtins.fetchGit {
+    url = "git@github.com:nix-community/emacs-overlay.git";
+    ref = "master";
+    rev = "7448efeddfa7ac44dceffbb43f70cb5d5ecb7385"; # pinned to 02/12/2020
+  });
 
   hub = pkgs.gitAndTools.hub;
 
@@ -57,7 +64,7 @@ let
       pkgs.bash
       pkgs.cacert
       pkgs.coreutils
-      pkgs.emacs
+      pkgs.emacsGit
       pkgs.fasd
       pkgs.gawk
       pkgs.jq
