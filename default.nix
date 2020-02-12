@@ -69,6 +69,7 @@ let
       pkgs.ripgrep
       pkgs.tree
       pkgs.zsh-completions
+      pkgs.zsh-syntax-highlighting
     ];
 
   # The list of packages to be installed
