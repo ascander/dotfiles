@@ -3,8 +3,6 @@
 # Based on https://github.com/nmattia/homies/blob/master/default.nix
 let
 
-  pkgs = pkgs-darwin;
-
   pkgs-darwin = import (builtins.fetchTarball {
     # Descriptive name to make the store path easier to identify
     name = "nixpkgs-19.09-darwin";
@@ -21,6 +19,8 @@ let
     rev = "7448efeddfa7ac44dceffbb43f70cb5d5ecb7385"; # pinned to 02/12/2020
   });
 
+  pkgs = pkgs-darwin;
+
   hub = pkgs.gitAndTools.hub;
 
   custom = rec {
@@ -30,11 +30,11 @@ let
     zshrc = callPackage ./zshrc {};
     geometry-zsh = callPackage ./zshrc/geometry-zsh.nix {};
     dircolors-solarized = callPackage ./zshrc/dircolors-solarized.nix {};
-    metals = pkgs.callPackage ./metals {};
-    fzf = pkgs.callPackage ./fzf {};
+    metals = callPackage ./metals {};
+    fzf = callPackage ./fzf {};
 
     # Convert 'yarn.lock' files into Nix expressions
-    yarn2nix = pkgs.callPackage (pkgs.fetchFromGitHub {
+    yarn2nix = callPackage (pkgs.fetchFromGitHub {
       owner = "moretea";
       repo = "yarn2nix";
       rev = "3cc020e384ce2a439813adb7a0cc772a034d90bb";
@@ -42,7 +42,7 @@ let
     }) {};
 
     # The *other* editor
-    vim = pkgs-darwin.callPackage ./vim {
+    vim = callPackage ./vim {
       inherit metals yarn2nix;
       inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
     };
