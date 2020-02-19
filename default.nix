@@ -20,8 +20,8 @@ let
   });
 
   pkgs = pkgs-darwin;
-
   hub = pkgs.gitAndTools.hub;
+  pinentry = if (pkgs.stdenv.isDarwin) then pkgs.pinentry_mac else pkgs.pinentry;
 
   custom = rec {
     inherit (pkgs) callPackage;
@@ -59,14 +59,17 @@ let
       zshrc
       geometry-zsh
       dircolors-solarized
+      pinentry
 
       # Vernilla packages
       pkgs.bash
       pkgs.cacert
       pkgs.coreutils
-      pkgs.emacsGit
+      # pkgs.emacsGit
+      pkgs.emacs
       pkgs.fasd
       pkgs.gawk
+      pkgs.gnupg
       pkgs.jq
       pkgs.less
       pkgs.nix
