@@ -84,6 +84,7 @@ alias gcb='git checkout -b'
 
 alias gup='git pull --rebase'
 alias grv='git remote -v'
+alias gpr='hub pull-request -c'
 
 # Fasd settings
 if (( $+commands[fasd] )); then
