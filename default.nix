@@ -16,12 +16,33 @@ let
   emacs-overlay = import (builtins.fetchGit {
     url = "git@github.com:nix-community/emacs-overlay.git";
     ref = "master";
-    rev = "7448efeddfa7ac44dceffbb43f70cb5d5ecb7385"; # pinned to 02/12/2020
+    rev = "020d3009feffb10bb3d43d3b69882ee7fc9a2b50"; # pinned to 02/27/2020
   });
 
   pkgs = pkgs-darwin;
   hub = pkgs.gitAndTools.hub;
   pinentry = if (pkgs.stdenv.isDarwin) then pkgs.pinentry_mac else pkgs.pinentry;
+
+  # Bleeding edge Emacs slows way down in fullscreen on MacOS; running the
+  # latest Emacs 27 seems to work okay.
+  emacs27 = pkgs.emacsGit.overrideAttrs(old: {
+    src = pkgs.fetchFromGitHub {
+      owner = "emacs-mirror";
+      repo = "emacs";
+      rev = "f9e53947c71ddf7f8d176a23c0a585fafa13b952"; # emacs-27 branch
+      sha256 = "1hjnvbpa7iirh2hgqw707az13788hjffkg29r74hk9pikmyq0dxz";
+    };
+  });
+
+  # See: https://nixos.org/nixos/manual/index.html#module-services-emacs-adding-packages
+  myEmacsWithPackages = (pkgs.emacsPackagesGen emacs27).emacsWithPackages;
+
+  # Currently vterm support requires building with the 'libvterm' library and
+  # the 'emacs-libvterm' package. Longer term, all packages should be moved here
+  # and pinned to the appropriate version of 'emacs-overlay'
+  emacs = myEmacsWithPackages (epkgs: (with epkgs.melpaPackages; [
+    vterm
+  ]));
 
   custom = rec {
     inherit (pkgs) callPackage;
@@ -51,6 +72,7 @@ let
   allPlatforms = with custom;
     [
       # Customized packages
+      emacs
       fzf
       git
       hub
@@ -65,13 +87,12 @@ let
       pkgs.bash
       pkgs.cacert
       pkgs.coreutils
-      # pkgs.emacsGit
-      pkgs.emacs
       pkgs.fasd
       pkgs.gawk
       pkgs.gnupg
       pkgs.jq
       pkgs.less
+      pkgs.libvterm-neovim
       pkgs.nix
       pkgs.nix-zsh-completions
       pkgs.nodejs               # TODO migrate globally installed node packages to Nix
@@ -84,7 +105,6 @@ let
 
   # The list of packages to be installed
   tools = allPlatforms;
-
 in
   if pkgs.lib.inNixShell
   then pkgs.mkShell
