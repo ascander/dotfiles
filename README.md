@@ -1,6 +1,6 @@
 # Ascander's Dotfiles without Nix
 
-If you're looking for the Nix-based system configuration, you want https://github.com/ascander/dots
+If you're looking for the Nix-based system configuration, you want [ascander/dots](https://github.com/ascander/dots)
 
 ## Overview
 
