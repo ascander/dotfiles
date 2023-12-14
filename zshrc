@@ -46,7 +46,7 @@ setopt EXTENDED_HISTORY
 setopt autocd
 
 if [[ $TERM != "dumb" && (-z $INSIDE_EMACS || $INSIDE_EMACS == "vterm") ]]; then
-  eval "$(/etc/profiles/per-user/adost/bin/starship init zsh)"
+  eval "$(starship init zsh)"
 fi
 
 # eval "$(/nix/store/jfri01cybsxjw495lq1q6y4bb2qvzma2-direnv-2.32.2/bin/direnv hook zsh)"
