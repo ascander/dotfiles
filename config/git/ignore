@@ -1,0 +1,15 @@
+.DS_Store
+*.bak
+*.swp
+*.swo
+*.temp
+*~
+*#
+.envrc
+.direnv/
+.bloop/
+.bsp/
+.metals/
+project/project
+project/metals.sbt
+project/.bloop
