@@ -13,3 +13,21 @@ This is a Nix-free version of my personal development environment for macOS mach
     - Tmux
     - Karabiner Elements
     - ZSH
+
+## TODO
+
+- [x] Add packages to Brewfile
+- [x] Add Neovim configuration
+    - [x] add lazy.nvim support for plugins
+    - [x] switch to mason for LSP configs/servers
+- [x] Add Truecolor support for tmux + alacritty (tmux-256color terminal, alacritty TERMINFO)
+- [ ] Add bootstrap script for installing Homebrew, etc.
+- [ ] Add macOS defaults script
+- [ ] Update dotfiles re: Nix-managed content
+- [ ] Add zshrc file
+- [ ] Figure out ZSH plugins (syntax highlighting, vi-mode, completions, etc.)
+- [ ] Add local config settings (eg. `.zshrc.local`)
+- [ ] Enable `focus-events` in tmux (`set-option -g focus-events on`)
+- [ ] Add `jsonls` via `lspconfig` to keep `neoconf.nvim` happy
+- [ ] Add `node` executable for nvim-treesitter to run `:TSInstallFromGrammar`
+- [ ] Research Python/Ruby/Node.js/Perl provider(s) to see if they're needed; health warnings here
