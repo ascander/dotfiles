@@ -1,0 +1,15 @@
+# What protocol to use when performing git operations. Supported values: ssh, https
+git_protocol: ssh
+# What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.
+editor: !!null nvim
+# When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
+prompt: enabled
+# A pager program to send command output to, e.g. "less". Set the value to "cat" to disable the pager.
+pager: less
+# Aliases allow you to create nicknames for gh commands
+aliases:
+    co: '!id="$(gh pr list -L100 | fzf | cut -f1)"; [ -n "$id" ] && gh pr checkout "$id"'
+    fm: repo fork --remote-name ascander
+    prs: search prs --state=open --archived=false --draft=false --involves=@me
+    drafts: search prs --state=open --archived=false --draft=true --involves=@me
+    repos: api organizations/1335810/team/2231715/repos --paginate --jq '.[] | select(.role_name == "write" or .role_name == "admin") | select(.archived == false) | select(.language as $lang | ["Scala", "Shell", "Jupyter Notebook", "Dockerfile", "Python", "Makefile", "HTML"] | index($lang)) | select(.name as $name | ["graph-spark", "smrt-skyway", "service-registry"] | index($name) | not) | [.name, .html_url, .description] | @csv'
