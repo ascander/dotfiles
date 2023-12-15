@@ -1,14 +1,10 @@
-
 typeset -U path cdpath fpath manpath
 
-# for profile in ${(z)NIX_PROFILES}; do
-#   fpath+=($profile/share/zsh/site-functions $profile/share/zsh/$ZSH_VERSION/functions $profile/share/zsh/vendor-completions)
-# done
-#
-# HELPDIR="/nix/store/4rkml22zxidn5x9axz80q81xc1bkdkdz-zsh-5.9/share/zsh/$ZSH_VERSION/help"
-
-
-
+# Initialize zsh-autocomplete early (ie. before `compdef`)
+# See https://github.com/marlonrichert/zsh-autocomplete
+if [[ -f "/usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]]; then
+  source /usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+fi
 
 path+="$HOME/.zsh/plugins/zsh-vi-mode"
 fpath+="$HOME/.zsh/plugins/zsh-vi-mode"
@@ -17,17 +13,6 @@ fpath+="$HOME/.zsh/plugins/zsh-vi-mode"
 # calling it twice causes slight start up slowdown
 # as all $fpath entries will be traversed again.
 autoload -U compinit && compinit
-
-# source /nix/store/kw21rgbl1mgwnj00pzsssq2cl0rn0bgw-zsh-autosuggestions-0.7.0/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-
-
-
-
-if [[ -f "$HOME/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ]]; then
-  source "$HOME/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
-fi
-
 
 # History options should be set in .zshrc and after oh-my-zsh sourcing.
 # See https://github.com/nix-community/home-manager/issues/177.
@@ -48,8 +33,6 @@ setopt autocd
 if [[ $TERM != "dumb" && (-z $INSIDE_EMACS || $INSIDE_EMACS == "vterm") ]]; then
   eval "$(starship init zsh)"
 fi
-
-# eval "$(/nix/store/jfri01cybsxjw495lq1q6y4bb2qvzma2-direnv-2.32.2/bin/direnv hook zsh)"
 
 # Bindkey
 bindkey -e
@@ -80,6 +63,12 @@ export LESS_TERMCAP_so=$'\E[32m'    # begin reverse video
 export LESS_TERMCAP_se=$'\E[0m'     # reset reverse video
 export LESS_TERMCAP_us=$'\E[33m'    # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
+
+# Initialize direnv
+# See https://direnv.net/docs/hook.html#zsh
+if (( $+commands[direnv] )); then
+  eval "$(direnv hook zsh)"
+fi
 
 # Source local zshrc if present
 test -s "$HOME/.zshrc.local" && source "$HOME/.zshrc.local"
@@ -177,13 +166,29 @@ alias ..='cd ../.'
 alias ...='cd ../../.'
 alias ....='cd ../../../.'
 alias .....='cd ../../../../.'
-
-
-
-# Aliases
 alias vimdiff='nvim -d'
 
-# Named Directory Hashes
+# Initialize zsh-autosuggestions (ie. after `compdef`)
+# See https://github.com/zsh-users/zsh-autosuggestions
+if [[ -f "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
+# Initialize zsh-vi-mode
+# See https://github.com/jeffreytse/zsh-vi-mode
+if [[ -f "/usr/local/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ]]; then
+  source /usr/local/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+fi
 
-# source /nix/store/a1lbpfskjik1ky43s1qgihjnmb1jv11r-zsh-syntax-highlighting-0.7.1/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Initialize zsh-syntax-highlighting
+# See https://github.com/zsh-users/zsh-syntax-highlighting
+if [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# Initialize zsh-history-substring-search
+# See https://github.com/zsh-users/zsh-history-substring-search
+if [[ -f "/usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh" ]]; then
+  source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+fi
+
