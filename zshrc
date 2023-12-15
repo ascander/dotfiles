@@ -1,44 +1,45 @@
 typeset -U path cdpath fpath manpath
 
-# Initialize zsh-autocomplete early (ie. before `compdef`)
+# Initialize zsh-autocomplete early (ie. before `compinit`)
 # See https://github.com/marlonrichert/zsh-autocomplete
 if [[ -f "/usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]]; then
   source /usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 fi
-
-path+="$HOME/.zsh/plugins/zsh-vi-mode"
-fpath+="$HOME/.zsh/plugins/zsh-vi-mode"
 
 # Oh-My-Zsh/Prezto calls compinit during initialization,
 # calling it twice causes slight start up slowdown
 # as all $fpath entries will be traversed again.
 autoload -U compinit && compinit
 
-# History options should be set in .zshrc and after oh-my-zsh sourcing.
-# See https://github.com/nix-community/home-manager/issues/177.
-HISTSIZE="10000"
-SAVEHIST="10000"
+# History settings
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=500000
+SAVEHIST=100000
 
-HISTFILE="$HOME/.zsh_history"
-mkdir -p "$(dirname "$HISTFILE")"
+# Set options
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands histtory list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
+setopt auto_cd                # cd by typing directory name
 
-setopt HIST_FCNTL_LOCK
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt SHARE_HISTORY
-setopt EXTENDED_HISTORY
-setopt autocd
-
-if [[ $TERM != "dumb" && (-z $INSIDE_EMACS || $INSIDE_EMACS == "vterm") ]]; then
-  eval "$(starship init zsh)"
+# Load plugins (installed by Homebrew)
+if [[ -d "/usr/local/share/" ]]; then
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source /usr/local/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 fi
 
-# Bindkey
+# Key bindings
 bindkey -e
+bindkey '^[[A' history-substring-search-up         # up arrow
+bindkey '^[[B' history-substring-search-down       # down arrow
+bindkey -M vicmd 'k' history-substring-search-up   # use 'k' for vi mode
+bindkey -M vicmd 'j' history-substring-search-down # use 'k' for vi mode
 bindkey '\e[3~' delete-char
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
 bindkey ' '  magic-space
 
 # Less settings
@@ -63,6 +64,11 @@ export LESS_TERMCAP_so=$'\E[32m'    # begin reverse video
 export LESS_TERMCAP_se=$'\E[0m'     # reset reverse video
 export LESS_TERMCAP_us=$'\E[33m'    # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'     # reset underline
+
+# Initialize starship
+if (( $+commands[starship])); then
+  eval "$(starship init zsh)"
+fi
 
 # Initialize direnv
 # See https://direnv.net/docs/hook.html#zsh
@@ -118,10 +124,6 @@ if (( $+commands[pyenv] )); then
   eval "$(pyenv init -)"
 fi
 
-# # Nix aliases
-# alias ns='nix-shell'
-# alias ne='nix-env'
-
 # Command line calculator from https://unix.stackexchange.com/a/480316
 calc () {
   local in="$(echo " $*" | sed -e 's/\[/(/g' -e 's/\]/)/g')";
@@ -141,17 +143,6 @@ alias lm="ll --sort=modified"                         # show by modified date (o
 alias lt="ll --tree"                                  # show filetree
 alias l="ll"                                          # pacify the monster
 
-# Colorize some programs if '~/.dircolors' exists
-# if (( $+commands[dircolors] )); then
-#     test -r $HOME/.dircolors && eval "$(dircolors $HOME/.dircolors)"
-#
-#     alias dir='dir --color=auto'
-#     alias vdir='vdir --color=auto'
-#     alias grep='grep --color=auto'
-#     alias fgrep='fgrep --color=auto'
-#     alias egrep='egrep --color=auto'
-# fi
-
 # Safety first…
 alias rm='rm -i'
 alias mv='mv -i'
@@ -167,28 +158,4 @@ alias ...='cd ../../.'
 alias ....='cd ../../../.'
 alias .....='cd ../../../../.'
 alias vimdiff='nvim -d'
-
-# Initialize zsh-autosuggestions (ie. after `compdef`)
-# See https://github.com/zsh-users/zsh-autosuggestions
-if [[ -f "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
-  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-
-# Initialize zsh-vi-mode
-# See https://github.com/jeffreytse/zsh-vi-mode
-if [[ -f "/usr/local/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh" ]]; then
-  source /usr/local/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-fi
-
-# Initialize zsh-syntax-highlighting
-# See https://github.com/zsh-users/zsh-syntax-highlighting
-if [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-# Initialize zsh-history-substring-search
-# See https://github.com/zsh-users/zsh-history-substring-search
-if [[ -f "/usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh" ]]; then
-  source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-fi
 
