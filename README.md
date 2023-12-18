@@ -18,36 +18,30 @@ This is a Nix-free version of my personal development environment for macOS mach
 
 Do the following to set up a new macOS machine:
 
-1. Install the Xcode command line tools.
+1. [Generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) (ie. for Github access)
+1. Run the bootstrap script
 
-```sh
-xcode-select --install
-```
+    ```sh
+    ./bootstrap.sh
+    ```
 
-2. [Generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-3. Install Homebrew
+1. Install packages from the Brewfile.
 
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
+    ```sh
+    brew bundle --file ./Brewfile
+    ```
 
-4. Install packages from Brewfile.
+1. Install `rcm` configuration file
 
-```sh
-brew bundle --file ./Brewfile
-```
+    ```sh
+    rcup -d . rcrc
+    ```
 
-5. Install `rcm` configuration file
+1. Install dotfiles
 
-```sh
-rcup -d . rcrc
-```
-
-6. Install dotfiles
-
-```sh
-rcup
-```
+    ```sh
+    rcup
+    ```
 
 ## Neovim
 
