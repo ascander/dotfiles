@@ -1,3 +1,4 @@
+# vi: ft=gitignore
 .DS_Store
 *.bak
 *.swp
