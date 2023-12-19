@@ -9,3 +9,6 @@ export XDG_CONFIG_HOME=$HOME/.config
 
 # Pick up terminfo for `tmux-256color` and `alacritty`
 export TERMINFO_DIRS="$HOME/.local/share/terminfo:$HOME/.terminfo"
+
+# Explicitly set pyenv root
+export PYENV_ROOT="$HOME/.pyenv"
