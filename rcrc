@@ -1,3 +1,3 @@
 DOTFILES_DIRS="~/code/dotfiles"
-EXCLUDES="LICENSE README.md Brewfile Brewfile.local"
+EXCLUDES="LICENSE README.md Brewfile Brewfile.local Brewfile.local.lock.json bootstrap.sh"
 
