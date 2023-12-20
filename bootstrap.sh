@@ -16,7 +16,7 @@ xcode-select --install
 
 echo "[bootstrap.sh] - Installing Homebrew"
 if [[ -d "/usr/local/bin" ]]; then
-	exit 0
+	echo "[bootstrap.sh] - Homebrew already installed"
 else
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
