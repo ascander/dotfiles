@@ -35,7 +35,11 @@
 [credential]
 	helper = "osxkeychain"
 
+[include]
+  path = ~/.config/delta/themes.gitconfig
+
 [delta]
+  features = tokyonight-moon
 	light = false
 	navigate = true
 
