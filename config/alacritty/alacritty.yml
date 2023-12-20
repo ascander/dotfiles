@@ -468,47 +468,47 @@ draw_bold_text_with_bright_colors: true
 # Rosé Pine Alacritty Colors
 # Style: Rosé Pine Moon
 # Upstream: https://github.com/rose-pine/alacritty/blob/7c3625f3d0f34359ba114e09b1ba3f3c1bed399a/dist/rose-pine-moon.yml
-colors:
-  primary:
-    background: "0x232136"
-    foreground: "0xe0def4"
-  cursor:
-    text: "0xe0def4"
-    cursor: "0x56526e"
-  vi_mode_cursor:
-    text: "0xe0def4"
-    cursor: "0x56526e"
-  line_indicator:
-    foreground: None
-    background: None
-  selection:
-    text: "0xe0def4"
-    background: "0x44415a"
-  normal:
-    black: "0x393552"
-    red: "0xeb6f92"
-    green: "0x3e8fb0"
-    yellow: "0xf6c177"
-    blue: "0x9ccfd8"
-    magenta: "0xc4a7e7"
-    cyan: "0xea9a97"
-    white: "0xe0def4"
-  bright:
-    black: "0x6e6a86"
-    red: "0xeb6f92"
-    green: "0x3e8fb0"
-    yellow: "0xf6c177"
-    blue: "0x9ccfd8"
-    magenta: "0xc4a7e7"
-    cyan: "0xea9a97"
-    white: "0xe0def4"
-  hints:
-    start:
-      foreground: "#908caa"
-      background: "#2a273f"
-    end:
-      foreground: "#6e6a86"
-      background: "#2a273f"
+# colors:
+#   primary:
+#     background: "0x232136"
+#     foreground: "0xe0def4"
+#   cursor:
+#     text: "0xe0def4"
+#     cursor: "0x56526e"
+#   vi_mode_cursor:
+#     text: "0xe0def4"
+#     cursor: "0x56526e"
+#   line_indicator:
+#     foreground: None
+#     background: None
+#   selection:
+#     text: "0xe0def4"
+#     background: "0x44415a"
+#   normal:
+#     black: "0x393552"
+#     red: "0xeb6f92"
+#     green: "0x3e8fb0"
+#     yellow: "0xf6c177"
+#     blue: "0x9ccfd8"
+#     magenta: "0xc4a7e7"
+#     cyan: "0xea9a97"
+#     white: "0xe0def4"
+#   bright:
+#     black: "0x6e6a86"
+#     red: "0xeb6f92"
+#     green: "0x3e8fb0"
+#     yellow: "0xf6c177"
+#     blue: "0x9ccfd8"
+#     magenta: "0xc4a7e7"
+#     cyan: "0xea9a97"
+#     white: "0xe0def4"
+#   hints:
+#     start:
+#       foreground: "#908caa"
+#       background: "#2a273f"
+#     end:
+#       foreground: "#6e6a86"
+#       background: "#2a273f"
 
 # Rosé Pine Alacritty Colors
 # Style: Rosé Pine Dawn
@@ -581,6 +581,38 @@ colors:
 #     cyan: "0x5fb4b4"
 #     white: "0xffffff"
 
+# TokyoNight Moon Alacritty Colors
+colors:
+  # Default colors
+  primary:
+    background: '0x222436'
+    foreground: '0xc8d3f5'
+
+  # Normal colors
+  normal:
+    black:   '0x1b1d2b'
+    red:     '0xff757f'
+    green:   '0xc3e88d'
+    yellow:  '0xffc777'
+    blue:    '0x82aaff'
+    magenta: '0xc099ff'
+    cyan:    '0x86e1fc'
+    white:   '0x828bb8'
+
+  # Bright colors
+  bright:
+    black:   '0x444a73'
+    red:     '0xff757f'
+    green:   '0xc3e88d'
+    yellow:  '0xffc777'
+    blue:    '0x82aaff'
+    magenta: '0xc099ff'
+    cyan:    '0x86e1fc'
+    white:   '0xc8d3f5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff966c' }
+    - { index: 17, color: '0xc53b53' }
 
 # Bell
 #
