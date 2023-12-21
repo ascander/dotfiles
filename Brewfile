@@ -4,6 +4,7 @@ tap "homebrew/cask-fonts"
 tap "nrlquaker/createzap"
 
 # Fonts
+brew "font-fira-code-nerd-font"
 brew "font-fira-mono-nerd-font"
 brew "font-blex-mono-nerd-font"
 
