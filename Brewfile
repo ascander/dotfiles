@@ -45,6 +45,7 @@ brew "zsh-vi-mode"
 
 # Casks
 cask "alacritty"
+cask "amethyst"
 cask "arc"
 cask "karabiner-elements"
 cask "obsidian"
