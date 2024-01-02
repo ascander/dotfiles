@@ -25,7 +25,7 @@ Do the following to set up a new macOS machine:
     ./bootstrap.sh
     ```
 
-1. Install packages from the Brewfile.
+1. Install packages from the Brewfile
 
     ```sh
     brew bundle --file ./Brewfile
@@ -43,13 +43,19 @@ Do the following to set up a new macOS machine:
     rcup
     ```
 
+1. Set up macOS defaults
+
+    ```sh
+    ./defaults.sh
+    ```
+
 ## Neovim
 
 I'm trying out [LazyVim](https://lazyvim.github.io/) as an editor instead of a Nix-based configuration. You can find it at [ascander/nvim](https://github.com/ascander/nvim)
 
 ## Local
 
-My convention for local configuration (ie. packages and/or configuration you need on a work computer) is to use file(s) ending in `.local` including:
+My convention for local configuration (ie., packages and/or configuration you need on a work computer) is to use file(s) ending in `.local` including:
 
 - `Brewfile.local` for Homebrew packages
 - `zshrc.local` for ZSH settings/env/etc.
