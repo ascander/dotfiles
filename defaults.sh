@@ -277,3 +277,5 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 # Bottom right screen corner → Start screen saver
 defaults write com.apple.dock wvous-br-corner -int 5
 defaults write com.apple.dock wvous-br-modifier -int 0
+
+echo "Done. Some changes require a logout/restart to take effect."
