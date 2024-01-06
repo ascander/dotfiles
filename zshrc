@@ -1,15 +1,13 @@
 typeset -U path cdpath fpath manpath
 
-# Initialize zsh-autocomplete early (ie. before `compinit`)
+# Initialize zsh-autocomplete before `compinit`
 # See https://github.com/marlonrichert/zsh-autocomplete
 if [[ -f "/usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh" ]]; then
   source /usr/local/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 fi
 
-# Oh-My-Zsh/Prezto calls compinit during initialization,
-# calling it twice causes slight start up slowdown
-# as all $fpath entries will be traversed again.
-autoload -U compinit && compinit
+# Completion
+autoload -Uz compinit && compinit
 
 # History settings
 HISTFILE=$HOME/.zsh_history
@@ -150,6 +148,7 @@ alias cp='cp -i'
 
 # Misc
 alias c='clear' # easier than <prefix> C-l in a tmux session
+alias n='nvim'  # helluva optimization
 alias mkdir='mkdir -p'
 alias du='du -h'
 alias glow='glow -p'
