@@ -18,7 +18,7 @@ This is a Nix-free version of my personal development environment for macOS mach
 
 Do the following to set up a new macOS machine:
 
-1. [Generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) (ie. for Github access)
+1. [Generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) (also add key to Github and update [./config/git/config](./config/git/config))
 1. Run the bootstrap script
 
     ```sh
