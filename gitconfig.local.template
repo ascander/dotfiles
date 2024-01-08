@@ -1,0 +1,5 @@
+# vi: ft=gitconfig
+[user]
+	email = GITHUB_EMAIL_ADDRESS
+	name = GITHUB_NAME
+	signingKey = GITHUB_SIGNING_KEY
