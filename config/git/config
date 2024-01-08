@@ -37,6 +37,7 @@
 
 [include]
   path = ~/.config/delta/themes.gitconfig
+  path = ~/.gitconfig.local
 
 [delta]
   features = tokyonight-moon
@@ -67,7 +68,3 @@
 [tag]
 	gpgSign = true
 
-[user]
-	email = "1815984+ascander@users.noreply.github.com"
-	name = "Ascander Dost"
-	signingKey = "7406157BCA775D6B"
