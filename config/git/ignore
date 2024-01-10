@@ -8,9 +8,17 @@
 *#
 .envrc
 .direnv/
+
+# Scala
 .bloop/
 .bsp/
 .metals/
 project/project
 project/metals.sbt
 project/.bloop
+
+# Python
+.python-version
+.env
+Scratch.ipynb
+
