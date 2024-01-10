@@ -137,7 +137,8 @@ alias f="cat"
 alias ls="eza --color=auto --group-directories-first" # use color and group directories first
 alias ll="ls --long --header --git"                   # long format, with headers and git status
 alias la="ll -a"                                      # show all files
-alias lm="ll --sort=modified"                         # show by modified date (oldest first)
+alias lm="ll --sort=modified"                         # show by modified date (newest last)
+alias lz="ll --sort=size"                             # show by size (largest last)
 alias lt="ll --tree"                                  # show filetree
 alias l="ll"                                          # pacify the monster
 
