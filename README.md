@@ -53,6 +53,11 @@ Do the following to set up a new macOS machine:
 
 I'm trying out [LazyVim](https://lazyvim.github.io/) as an editor instead of a Nix-based configuration. You can find it at [ascander/nvim](https://github.com/ascander/nvim)
 
+## GPG
+
+Setting up GPG for signed commits to Github requires Homebrew dependencies to be installed, viz. `gnupg` and `pinentry-mac`. I currently set this up manually, following [this gist](https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e#file-2-using-gpg-md).
+
+
 ## Local
 
 My convention for local configuration (ie., packages and/or configuration you need on a work computer) is to use file(s) ending in `.local` including:
