@@ -140,6 +140,7 @@ alias la="ll -a"                                      # show all files
 alias lm="ll --sort=modified"                         # show by modified date (newest last)
 alias lz="ll --sort=size"                             # show by size (largest last)
 alias lt="ll --tree"                                  # show filetree
+alias ld="ll --only-dirs"                             # show only directories
 alias l="ll"                                          # pacify the monster
 
 # Safety first…
