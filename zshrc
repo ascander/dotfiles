@@ -78,7 +78,22 @@ fi
 test -s "$HOME/.zshrc.local" && source "$HOME/.zshrc.local"
 
 # Preferred tmux pane arrangement
-# Taken from: https://youtu.be/sSOfr2MtRU8
+#
+#  ________________________________________
+# |                                        |
+# |                                        |
+# |                                        |
+# |                                        |
+# |                                        |
+# |                                        |
+# |                                        |
+# |                                        |
+# |________________________________________|
+# |                   |                    |
+# |                   |                    |
+# |                   |                    |
+# |                   |                    |
+# |___________________|____________________|
 ide () {
   tmux split-window -v -p 38 # 100 - 100 / 1.618
   tmux split-window -h -p 50
@@ -86,6 +101,7 @@ ide () {
 }
 
 # Tmux aliases
+alias tm='tmux'
 alias tl='tmux list-sessions'
 alias ts='tmux new-session -s'
 alias ta='tmux attach -t'
