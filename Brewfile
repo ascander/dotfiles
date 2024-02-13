@@ -3,11 +3,6 @@ tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "nrlquaker/createzap"
 
-# Fonts
-brew "font-fira-code-nerd-font"
-brew "font-fira-mono-nerd-font"
-brew "font-blex-mono-nerd-font"
-
 # Brews
 brew "bat"
 brew "direnv"
@@ -53,6 +48,11 @@ cask "karabiner-elements"
 cask "obsidian"
 cask "signal"
 cask "spotify"
+
+# Fonts
+cask "font-fira-code-nerd-font"
+cask "font-fira-mono-nerd-font"
+cask "font-blex-mono-nerd-font"
 
 # Mac App Store apps
 mas "Slack", id: 803453959
