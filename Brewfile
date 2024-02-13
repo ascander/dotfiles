@@ -45,6 +45,7 @@ brew "zsh-syntax-highlighting"
 brew "zsh-vi-mode"
 
 # Casks
+cask "1password" # newest version
 cask "alacritty"
 cask "amethyst"
 cask "arc"
