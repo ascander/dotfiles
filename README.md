@@ -55,8 +55,7 @@ I'm trying out [LazyVim](https://lazyvim.github.io/) as an editor instead of a N
 
 ## GPG
 
-Setting up GPG for signed commits to Github requires Homebrew dependencies to be installed, viz. `gnupg` and `pinentry-mac`. I currently set this up manually, following [this gist](https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e#file-2-using-gpg-md).
-
+Setting up [GPG](https://www.gnupg.org/) for signed commits to Github requires Homebrew dependencies to be installed, viz. `gnupg` and `pinentry-mac`. I currently set this up manually, following [this gist](https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e#file-2-using-gpg-md).
 
 ## Local
 
