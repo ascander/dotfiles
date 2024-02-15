@@ -292,37 +292,37 @@ draw_bold_text_with_bright_colors: true
 #     - { index: 16, color: '0xff8349' }
 #     - { index: 17, color: '0xcb7985' }
 
-# # Nightfox Alacritty Colors
-# # Style: nordfox
-# # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nordfox/nightfox_alacritty.yml
-# colors:
-#   # Default colors
-#   primary:
-#     background: '0x2e3440'
-#     foreground: '0xcdcecf'
-#   # Normal colors
-#   normal:
-#     black:   '0x3b4252'
-#     red:     '0xbf616a'
-#     green:   '0xa3be8c'
-#     yellow:  '0xebcb8b'
-#     blue:    '0x81a1c1'
-#     magenta: '0xb48ead'
-#     cyan:    '0x88c0d0'
-#     white:   '0xe5e9f0'
-#   # Bright colors
-#   bright:
-#     black:   '0x465780'
-#     red:     '0xd06f79'
-#     green:   '0xb1d196'
-#     yellow:  '0xf0d399'
-#     blue:    '0x8cafd2'
-#     magenta: '0xc895bf'
-#     cyan:    '0x93ccdc'
-#     white:   '0xe7ecf4'
-#   indexed_colors:
-#     - { index: 16, color: '0xc9826b' }
-#     - { index: 17, color: '0xbf88bc' }
+# Nightfox Alacritty Colors
+# Style: nordfox
+# Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/nordfox/nightfox_alacritty.yml
+colors:
+  # Default colors
+  primary:
+    background: '0x2e3440'
+    foreground: '0xcdcecf'
+  # Normal colors
+  normal:
+    black:   '0x3b4252'
+    red:     '0xbf616a'
+    green:   '0xa3be8c'
+    yellow:  '0xebcb8b'
+    blue:    '0x81a1c1'
+    magenta: '0xb48ead'
+    cyan:    '0x88c0d0'
+    white:   '0xe5e9f0'
+  # Bright colors
+  bright:
+    black:   '0x465780'
+    red:     '0xd06f79'
+    green:   '0xb1d196'
+    yellow:  '0xf0d399'
+    blue:    '0x8cafd2'
+    magenta: '0xc895bf'
+    cyan:    '0x93ccdc'
+    white:   '0xe7ecf4'
+  indexed_colors:
+    - { index: 16, color: '0xc9826b' }
+    - { index: 17, color: '0xbf88bc' }
 #
 # Nightfox Alacritty Colors
 # Style: dayfox
@@ -581,38 +581,38 @@ draw_bold_text_with_bright_colors: true
 #     cyan: "0x5fb4b4"
 #     white: "0xffffff"
 
-# TokyoNight Moon Alacritty Colors
-colors:
-  # Default colors
-  primary:
-    background: '0x222436'
-    foreground: '0xc8d3f5'
-
-  # Normal colors
-  normal:
-    black:   '0x1b1d2b'
-    red:     '0xff757f'
-    green:   '0xc3e88d'
-    yellow:  '0xffc777'
-    blue:    '0x82aaff'
-    magenta: '0xc099ff'
-    cyan:    '0x86e1fc'
-    white:   '0x828bb8'
-
-  # Bright colors
-  bright:
-    black:   '0x444a73'
-    red:     '0xff757f'
-    green:   '0xc3e88d'
-    yellow:  '0xffc777'
-    blue:    '0x82aaff'
-    magenta: '0xc099ff'
-    cyan:    '0x86e1fc'
-    white:   '0xc8d3f5'
-
-  indexed_colors:
-    - { index: 16, color: '0xff966c' }
-    - { index: 17, color: '0xc53b53' }
+# # TokyoNight Moon Alacritty Colors
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x222436'
+#     foreground: '0xc8d3f5'
+#
+#   # Normal colors
+#   normal:
+#     black:   '0x1b1d2b'
+#     red:     '0xff757f'
+#     green:   '0xc3e88d'
+#     yellow:  '0xffc777'
+#     blue:    '0x82aaff'
+#     magenta: '0xc099ff'
+#     cyan:    '0x86e1fc'
+#     white:   '0x828bb8'
+#
+#   # Bright colors
+#   bright:
+#     black:   '0x444a73'
+#     red:     '0xff757f'
+#     green:   '0xc3e88d'
+#     yellow:  '0xffc777'
+#     blue:    '0x82aaff'
+#     magenta: '0xc099ff'
+#     cyan:    '0x86e1fc'
+#     white:   '0xc8d3f5'
+#
+#   indexed_colors:
+#     - { index: 16, color: '0xff966c' }
+#     - { index: 17, color: '0xc53b53' }
 
 # Bell
 #
