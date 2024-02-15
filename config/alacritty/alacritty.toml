@@ -51,3 +51,6 @@ style = "Italic"
 [font.normal]
 family = "FiraMono Nerd Font Mono"
 style = "Regular"
+
+[window]
+decorations = "None"
