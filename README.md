@@ -22,7 +22,7 @@ Do the following to set up a new macOS machine:
 1. Run the bootstrap script
 
     ```sh
-    ./bootstrap.sh
+    ./bin/bootstrap.sh
     ```
 
 1. Install packages from the Brewfile
@@ -46,12 +46,20 @@ Do the following to set up a new macOS machine:
 1. Set up macOS defaults
 
     ```sh
-    ./defaults.sh
+    ./bin/defaults.sh
     ```
 
 ## Neovim
 
 I'm trying out [LazyVim](https://lazyvim.github.io/) as an editor instead of a Nix-based configuration. You can find it at [ascander/nvim](https://github.com/ascander/nvim)
+
+## Alacritty Themes
+
+I've included a number of Alacritty themes in [config/alacritty/themes](./config/alacritty/themes/) as well as a theme switcher script in [bin/switchtheme.sh](./bin/switchtheme.sh). You can switch to eg. [nightfox](https://github.com/EdenEast/nightfox.nvim) as follows:
+
+```sh
+./bin/switchtheme.sh nightfox
+```
 
 ## GPG
 
