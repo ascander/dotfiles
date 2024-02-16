@@ -1,3 +1,4 @@
+.envrc
 *.local
 *.lock.json
 config/gh/hosts.yml
