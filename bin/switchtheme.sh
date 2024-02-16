@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# theme.sh - switch Alacritty theme
+# switchtheme.sh - switch Alacritty theme
 #
 # Description:
 #
@@ -11,7 +11,7 @@
 #
 # Usage:
 #
-#   theme.sh [OPTIONS] THEME_NAME
+#   switchtheme.sh [OPTIONS] THEME_NAME
 #
 # Options:
 #
@@ -31,15 +31,15 @@
 #
 #   List available themes:
 #
-#     theme.sh -l
+#     switchtheme.sh -l
 #
 #   Change theme to 'nordfox':
 #
-#     theme.sh nordfox
+#     switchtheme.sh nordfox
 #
 #   Change theme to 'rose-pine-moon' without creating a backup:
 #
-#     theme.sh -f rose-pine-moon
+#     switchtheme.sh -f rose-pine-moon
 
 # Sane behavior
 set -euo pipefail
@@ -81,21 +81,14 @@ list_themes() {
 main() {
   while getopts "hlf" opt; do
     case "$opt" in
-      h)
-        usage
-        exit
-      ;;
       l)
         list_themes
-        exit
-      ;;
+        exit;;
       f)
-        DELETE_BACKUP=1
-      ;;
-      *)
+        DELETE_BACKUP=1;;
+      h | *)
         usage
-        exit 1
-      ;;
+        exit;;
     esac
   done
   shift $((OPTIND-1))
