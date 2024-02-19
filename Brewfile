@@ -53,6 +53,11 @@ cask "spotify"
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono-nerd-font"
 cask "font-blex-mono-nerd-font"
+cask "font-charter"
+cask "font-cooper-hewitt"
+cask "font-source-sans-3"
+cask "font-source-serif-4"
+
 
 # Mac App Store apps
 mas "Slack", id: 803453959
