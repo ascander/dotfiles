@@ -1,4 +1,5 @@
 <!-- markdownlint-disable MD013 MD007 -->
+
 # Ascander's Dotfiles without Nix
 
 If you're looking for the Nix-based system configuration, you want [ascander/dots](https://github.com/ascander/dots)
@@ -9,10 +10,10 @@ This is a Nix-free version of my personal development environment for macOS mach
 
 - Homebrew for applications, packages, fonts, etc.
 - Configuration for the tools I use (symlinked by [rcm](https://github.com/thoughtbot/rcm)) including:
-    - Alacritty
-    - Tmux
-    - Karabiner Elements
-    - ZSH
+  - Alacritty
+  - Tmux
+  - Karabiner Elements
+  - ZSH
 
 ## Getting started
 
@@ -21,33 +22,33 @@ Do the following to set up a new macOS machine:
 1. [Generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 1. Run the bootstrap script
 
-    ```sh
-    ./bin/bootstrap.sh
-    ```
+   ```sh
+   ./bin/bootstrap.sh
+   ```
 
 1. Install packages from the Brewfile
 
-    ```sh
-    brew bundle --file ./Brewfile
-    ```
+   ```sh
+   brew bundle --file ./Brewfile
+   ```
 
 1. Install `rcm` configuration file
 
-    ```sh
-    rcup -d . rcrc
-    ```
+   ```sh
+   rcup -d . rcrc
+   ```
 
 1. Install dotfiles
 
-    ```sh
-    rcup
-    ```
+   ```sh
+   rcup
+   ```
 
 1. Set up macOS defaults
 
-    ```sh
-    ./bin/defaults.sh
-    ```
+   ```sh
+   ./bin/defaults.sh
+   ```
 
 ## Neovim
 
