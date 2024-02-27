@@ -62,4 +62,5 @@ cask "font-source-serif-4"
 # Mac App Store apps
 mas "Slack", id: 803453959
 mas "Things 3", id: 904280696
+mas "WhatsApp Messenger", id: 310633997
 
