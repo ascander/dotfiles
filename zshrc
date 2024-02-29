@@ -95,8 +95,8 @@ test -s "$HOME/.zshrc.local" && source "$HOME/.zshrc.local"
 # |                   |                    |
 # |___________________|____________________|
 ide () {
-  tmux split-window -v -p 38 # 100 - 100 / 1.618
-  tmux split-window -h -p 50
+  tmux split-window -v -l 38% # 100 - 100 / 1.618
+  tmux split-window -h -l 50%
   tmux select-pane -t 0
 }
 
