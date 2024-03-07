@@ -27,7 +27,7 @@
                     ]
                   }
                 },
-                "to": [
+                "to_if_held_down": [
                   {
                     "key_code": "left_control"
                   }
@@ -53,7 +53,7 @@
                     ]
                   }
                 },
-                "to": [
+                "to_if_held_down": [
                   {
                     "key_code": "right_option"
                   }
