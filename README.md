@@ -72,3 +72,35 @@ My convention for local configuration (ie., packages and/or configuration you ne
 
 - `Brewfile.local` for Homebrew packages
 - `zshrc.local` for ZSH settings/env/etc.
+
+## Notes
+
+### Karabiner
+
+If you want to define a mapping in Karabiner to do different things based on whether the key is pressed alone or with another key, use this structure:
+
+```json
+{
+  "from": {
+    "key_code": "caps_lock",
+    "modifiers": {
+      "optional": [
+        "any"
+      ]
+    }
+  },
+  "to": [
+    {
+      "key_code": "left_control"
+    }
+  ],
+  "to_if_alone": [
+    {
+      "key_code": "escape"
+    }
+  ],
+  "type": "basic"
+}
+```
+
+Using `to_when_held_down` instead of `to` results in having to tweak delay thresholds to tune when eg. `Esc` is sent vs. `Ctrl`, and I haven't been able to get it just right for how I type.
