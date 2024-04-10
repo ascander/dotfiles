@@ -7,3 +7,4 @@ export VISUAL="nvim"
 export PYENV_ROOT="$HOME/.pyenv"
 export TERMINFO_DIRS="$HOME/.local/share/terminfo:$HOME/.terminfo"
 export XDG_CONFIG_HOME=$HOME/.config
+export DOTFILES_ROOT="$HOME/code/dotfiles"
