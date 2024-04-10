@@ -175,4 +175,5 @@ alias ...='cd ../../.'
 alias ....='cd ../../../.'
 alias .....='cd ../../../../.'
 alias vimdiff='nvim -d'
+alias st='$DOTFILES_ROOT/bin/switchtheme.sh'
 
